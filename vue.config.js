@@ -8,7 +8,9 @@ module.exports = {
       alias: {
         // 默认有@  他指向的是：src
         assets: "@/assets",
-        components: "@/components"
+        static: "static",
+        components: "@/components",
+        views: "@/views",
       }
     }
   }
