@@ -1,17 +1,12 @@
 <template>
-  <div class="home">
-    <h1>read</h1>
-  </div>
+  <div></div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+<script>
+import { defineComponent } from 'vue'
+export default defineComponent({
 
-@Options({
-  components: {
-    HelloWorld
-  }
 })
-export default class Home extends Vue {}
 </script>
+
+<style scope></style>
