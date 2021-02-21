@@ -3,30 +3,29 @@
   <router-view />
 </template>
 
-<script>
-import { defineComponent } from "vue";
-export default defineComponent({});
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    setRem() {
+      const html: HTMLHtmlElement | null = document.querySelector('html')
+      let fontSize = window.innerWidth / 10
+      fontSize = fontSize > 50 ? 50 : fontSize
+      html && (html.style.fontSize = fontSize + 'px')
+    },
+    onError(error: Event) {
+      console.error(error)
+    }
+  },
+  mounted() {
+    window.addEventListener('DOMContentLoaded', this.setRem)
+    window.addEventListener('error', this.onError)
+  },
+  unmounted() {
+    window.removeEventListener('DOMContentLoaded', this.setRem)
+    window.removeEventListener('error', this.onError)
+  }
+})
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style lang="scss"></style>

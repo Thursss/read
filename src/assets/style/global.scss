@@ -1,0 +1,5 @@
+$fontsize: 37.5;
+
+@function px2rem($px){
+    @return ($px / $fontsize) + rem
+}
