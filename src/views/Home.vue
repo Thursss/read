@@ -9,9 +9,9 @@ export default defineComponent({
 })
 </script>
 
-<style lang='scss' scope>
+<style lang='scss' scoped>
   .font{
     font-family: '凌云行书';
-    font-size: 40px;
+    font-size: 30rem;
   }
 </style>
