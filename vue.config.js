@@ -7,8 +7,8 @@ module.exports = {
     resolve: {
       alias: {
         // 默认有@  他指向的是：src
+        '~': "/static",
         assets: "@/assets",
-        static: "static",
         components: "@/components",
         views: "@/views",
       }
