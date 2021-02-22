@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div class="font">凌云行书</div>
 </template>
 
 <script>
@@ -9,4 +9,9 @@ export default defineComponent({
 })
 </script>
 
-<style scope></style>
+<style lang='scss' scope>
+  .font{
+    font-family: '凌云行书';
+    font-size: 40px;
+  }
+</style>

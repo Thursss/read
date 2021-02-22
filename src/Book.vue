@@ -20,6 +20,7 @@ export default defineComponent({
         height: window.innerHeight,
         method: 'default'
       })
+      console.log(rendition)
       rendition.display()
     }
   },
