@@ -1,10 +1,33 @@
 $fontsize: 37.5;
 
-@function px2rem($px){
-    @return ($px / $fontsize) + rem
+@function px2rem($px) {
+    @return ($px / $fontsize) + rem;
 }
 
 @font-face {
-    font-family: '凌云行书';
-    src: url('./fonts/FZSJ-LINGYXS.TTF')
+    font-family: "凌云行书";
+    src: url("./fonts/FZSJ-LINGYXS.TTF");
+}
+
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+    transition: all 0.5s ease-in-out;
+}
+
+.slide-down-enter,
+.slide-down-leave-to {
+    transform: translateY(-48rem);
+    opacity: .2;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.5s ease-in-out;
+}
+
+.slide-up-enter,
+.slide-up-leave-to {
+    transform: translateY(48rem);
+    opacity: .2;
 }
