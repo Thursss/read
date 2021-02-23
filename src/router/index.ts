@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/book",
     name: "Book",
-    component: () => import("views/Book.vue")
+    component: () => import("views/Ebook.vue")
   }
 ]
 
