@@ -8,7 +8,7 @@ export default {
   namespaced: true,
   state () {
     return {
-      isShowMenu: true
+      isShowMenu: false
     }
   },
   mutations: {

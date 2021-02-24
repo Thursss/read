@@ -42,6 +42,9 @@ export default defineComponent({
     let navigation
     let locations
     rendition.display()
+    rendition.on('click', (event: Event) => {
+      console.log(event)
+    })
     //获取locations对象
     //直接调用不会生成 消耗太多资源
     book.ready
@@ -103,7 +106,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.book)
+    console.log(this.rendition)
   }
 })
 </script>
