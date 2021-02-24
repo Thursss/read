@@ -11,6 +11,8 @@ module.exports = {
         assets: "@/assets",
         components: "@/components",
         views: "@/views",
+        store: "@/store",
+        router: "@/router",
       }
     }
   }

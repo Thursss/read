@@ -13,8 +13,9 @@ export default defineComponent({
       // fontSize = fontSize > 5 ? 5 : fontSize
       html && (html.style.fontSize = fontSize + 'px')
     },
-    onError(error: Event) {
-      console.error(error)
+    onError(error: ErrorEvent) {
+      console.log(error)
+      // console.error(`https://www.baidu.com/s?ie=UTF-8&wd='${error.message}'`)
     }
   },
   mounted() {

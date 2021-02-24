@@ -6,33 +6,70 @@
         class="read"
         ref="read"
       ></div>
-      <BookHead :isShowMenu='isShowMenu'></BookHead>
+      <BookHead :isShowMenu="isShowMenu"></BookHead>
       <BookMask
         @leftEvent="prevPage"
         @centerEvent="toggleTitleAndMenu"
         @rightEvent="nextPage"
-        :class="{shadow: isShowMenu}"
+        :class="{ shadow: isShowMenu }"
       ></BookMask>
       <BookMenu
-        @onProgressChangeEvent='changBookProgress'
-        :isShowMenu='isShowMenu'
+        @onProgressChangeEvent="changBookProgress"
+        :isShowMenu="isShowMenu"
       ></BookMenu>
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
+// import { EBookstore } from 'store/modules/ebook'
 import Epub from 'epubjs'
 import BookHead from 'components/ebook/ebookHead.vue'
 import BookMask from 'components/ebook/ebookMask.vue'
 import BookMenu from 'components/ebook/ebookMenu.vue'
 
 export default defineComponent({
-  data () {
+  setup() {
+    const bookUrl1 = ref('/book/村上春树短篇小说集.epub')
+    const store = useStore()
+    const book = new Epub(bookUrl1.value)
+    const rendition = book.renderTo('read', {
+      width: window.innerwidth,
+      height: window.innerwidth
+    })
+    let navigation
+    let locations
+    rendition.display()
+    //获取locations对象
+    //直接调用不会生成 消耗太多资源
+    book.ready
+      .then(() => {
+        //获取目录内容
+        navigation = book.navigation
+        //通过自带的钩子函数  回调返回locations对象
+        return book.locations.generate()
+      })
+      .then(() => {
+        locations = book.locations
+      })
     return {
-      bookUrl1: '/book/村上春树短篇小说集.epub',
-      isShowMenu: true
+      store,
+      book,
+      rendition,
+      navigation,
+      locations
+    }
+  },
+  data() {
+    return {
+      bookUrl1: '/book/村上春树短篇小说集.epub'
+    }
+  },
+  computed: {
+    isShowMenu() {
+      return this.store.state.ebook.isShowMenu
     }
   },
   components: {
@@ -41,48 +78,32 @@ export default defineComponent({
     BookMenu
   },
   methods: {
-    showEpub () {
-      this.book = new Epub(this.bookUrl1)
-      this.rendition = this.book.renderTo('read', {
-        width: window.innerwidth,
-        height: window.innerwidth
-      })
-      this.rendition.display()
-      //获取locations对象
-      //直接调用不会生成 消耗太多资源
-      this.book.ready.then(() => {
-        //获取目录内容
-        this.navigation = this.book.navigation
-        //通过自带的钩子函数  回调返回locations对象
-        return this.book.locations.generate()
-      }).then(result => {
-        this.locations = this.book.locations
-      })
-    },
-    prevPage () {
+    prevPage() {
       if (this.isShowMenu) {
-        this.isShowMenu = false
+        this.store.commit('ebook/toggleEbookMenuState', false)
       } else {
         this.rendition && this.rendition.prev()
       }
     },
-    toggleTitleAndMenu () {
-      this.isShowMenu = !this.isShowMenu
+    toggleTitleAndMenu() {
+      this.store.commit('ebook/toggleEbookMenuState')
     },
-    nextPage () {
+    nextPage() {
       if (this.isShowMenu) {
-        this.isShowMenu = false
+        this.store.commit('ebook/toggleEbookMenuState', false)
       } else {
         this.rendition && this.rendition.next()
       }
     },
-    changBookProgress () {
-      this.rendition.display(this.locations.cfiFromPercentage(0.5))
-      this.isShowMenu = false
+    changBookProgress() {
+      console.log(this.locations)
+
+      this.store.commit('ebook/toggleEbookMenuState', false)
+      this.rendition && this.locations && this.rendition.display(this.locations.cfiFromPercentage(0.5))
     }
   },
-  mounted () {
-    this.showEpub()
+  mounted() {
+    console.log(this.book)
   }
 })
 </script>
