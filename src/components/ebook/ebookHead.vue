@@ -40,7 +40,7 @@ export default defineComponent({
   display: flex;
   height: 48rem;
   background-color: #ccc;
-  box-shadow: 0 -0.8rem 0.2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 1rem 4rem 8rem rgba(0, 0, 0, 0.2);
   .left,
   .right {
     display: flex;

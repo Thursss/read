@@ -11,8 +11,12 @@
         @leftEvent="prevPage"
         @centerEvent="toggleTitleAndMenu"
         @rightEvent="nextPage"
+        :class="{shadow: isShowMenu}"
       ></BookMask>
-      <BookMenu :isShowMenu='isShowMenu'></BookMenu>
+      <BookMenu
+        @onProgressChangeEvent='changBookProgress'
+        :isShowMenu='isShowMenu'
+      ></BookMenu>
     </div>
   </div>
 </template>
@@ -44,17 +48,37 @@ export default defineComponent({
         height: window.innerwidth
       })
       this.rendition.display()
+      //获取locations对象
+      //直接调用不会生成 消耗太多资源
+      this.book.ready.then(() => {
+        //获取目录内容
+        this.navigation = this.book.navigation
+        //通过自带的钩子函数  回调返回locations对象
+        return this.book.locations.generate()
+      }).then(result => {
+        this.locations = this.book.locations
+      })
     },
     prevPage () {
-      if (this.isShowMenu) this.isShowMenu = false
-      this.rendition && this.rendition.prev()
+      if (this.isShowMenu) {
+        this.isShowMenu = false
+      } else {
+        this.rendition && this.rendition.prev()
+      }
     },
     toggleTitleAndMenu () {
       this.isShowMenu = !this.isShowMenu
     },
     nextPage () {
-      if (this.isShowMenu) this.isShowMenu = false
-      this.rendition && this.rendition.next()
+      if (this.isShowMenu) {
+        this.isShowMenu = false
+      } else {
+        this.rendition && this.rendition.next()
+      }
+    },
+    changBookProgress () {
+      this.rendition.display(this.locations.cfiFromPercentage(0.5))
+      this.isShowMenu = false
     }
   },
   mounted () {
@@ -69,5 +93,9 @@ export default defineComponent({
 }
 .read-wapper {
   position: relative;
+  background-color: #ccc;
+}
+.shadow {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>

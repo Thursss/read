@@ -12,7 +12,7 @@
       <div class="menu-wapper">
         <ul class="menu-list">
           <li class="menu-item"><span class="icon-menu"></span></li>
-          <li class="menu-item"><span class="icon-progress"></span></li>
+          <li class="menu-item" @click="onProgressChange"><span class="icon-progress"></span></li>
           <li class="menu-item"><span class="icon-more"></span></li>
         </ul>
       </div>
@@ -25,6 +25,11 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     isShowMenu: Boolean
+  },
+  methods: {
+    onProgressChange () {
+      this.$emit('onProgressChangeEvent')
+    }
   }
 })
 </script>
@@ -38,17 +43,20 @@ export default defineComponent({
   z-index: 100;
   height: 48rem;
   background-color: #ccc;
-  box-shadow: 0 -0.8rem 0.2rem rgba(0, 0, 0, 0.2);
-  .menu-list {
-    display: flex;
+  box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
+  .menu-wapper {
     height: 100%;
-    .menu-item {
+    .menu-list {
       display: flex;
-      flex: 1;
       height: 100%;
-      align-items: center;
-      justify-content: center;
-      font-size: 18rem;
+      .menu-item {
+        display: flex;
+        flex: 1;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 18rem;
+      }
     }
   }
 }

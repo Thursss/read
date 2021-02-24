@@ -41,6 +41,7 @@ export default defineComponent({
   display: flex;
   width: 100%;
   height: 100%;
+  transition: all .5s;
   .view {
     // position: absolute;
     opacity: 0;
