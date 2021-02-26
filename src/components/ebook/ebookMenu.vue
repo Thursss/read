@@ -11,44 +11,56 @@
     >
       <div class="menu-wapper">
         <ul class="menu-list">
-          <li class="menu-item"><span class="icon-menu"></span></li>
+          <li
+            class="menu-item"
+            @click="toggleShowMoreMeun"
+          >
+            <span class="icon-menu"></span>
+            <p class="text">目录</p>
+          </li>
           <li
             class="menu-item"
             @click="onProgressChange"
-          ><span class="icon-progress"></span></li>
+          ><span class="icon-progress"></span>
+            <p class="text">进度</p>
+          </li>
           <li
             class="menu-item"
             @click='toggleShowMoreMeun'
-          ><span class="icon-more"></span></li>
+          ><span class="icon-more"></span>
+            <p class="text">设置</p>
+          </li>
         </ul>
       </div>
-      <MuenMore :isShowMoreMenu='isShowMoreMenu'></MuenMore>
+      <MuenMore></MuenMore>
     </div>
   </transition>
 </template>
 
-<script>
+<script lang='ts'>
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
 import MuenMore from 'components/ebook/menu/moreMenu.vue'
 
 export default defineComponent({
+  setup () {
+    const store: any = useStore()
+    return {
+      store
+    }
+  },
   props: {
     isShowMenu: Boolean
   },
   components: {
     MuenMore
   },
-  data () {
-    return {
-      isShowMoreMenu: true
-    }
-  },
   methods: {
     onProgressChange () {
       this.$emit('onProgressChangeEvent')
     },
     toggleShowMoreMeun () {
-      this.isShowMoreMenu = !this.isShowMoreMenu
+      this.store.commit('ebook/setEbookMoreMenuState')
     }
   }
 })
@@ -72,10 +84,15 @@ export default defineComponent({
       .menu-item {
         display: flex;
         flex: 1;
+        flex-direction: column;
         height: 100%;
         align-items: center;
         justify-content: center;
-        font-size: 18rem;
+        font-size: 14rem;
+        .text {
+          font-size: 8rem;
+          margin-top: 5rem;
+        }
       }
     }
   }

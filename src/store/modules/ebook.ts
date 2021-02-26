@@ -1,20 +1,25 @@
 import { createStore } from 'vuex'
 
 export interface EBookstore {
-  isShowMenu: boolean
+  isShowMenu: boolean,
+  isShowMoreMenu: boolean
 }
 
 export default {
   namespaced: true,
-  state () {
+  state (): EBookstore {
     return {
-      isShowMenu: false
+      isShowMenu: true,
+      isShowMoreMenu: false
     }
   },
   mutations: {
-    toggleEbookMenuState (state: EBookstore, toggleState?: boolean) {
+    setEbookMenuState (state: EBookstore, toggleState?: boolean) {
       state.isShowMenu = (toggleState || !state.isShowMenu)
-    }
+    },
+    setEbookMoreMenuState (state: EBookstore, toggleState?: boolean) {
+      state.isShowMoreMenu = (toggleState || !state.isShowMoreMenu)
+    },
   },
   actions: {},
 }

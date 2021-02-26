@@ -1,15 +1,15 @@
 <template>
   <div class="mask">
     <div
-      @click.stop='clickLeftEvent'
+      @click='clickLeftEvent'
       class="view left"
     ></div>
     <div
-      @click.stop='clickCenterEvent'
+      @click='clickCenterEvent'
       class="view center"
     ></div>
     <div
-      @click.stop='clickRightEvent'
+      @click='clickRightEvent'
       class="view right"
     ></div>
   </div>

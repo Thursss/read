@@ -1,11 +1,7 @@
 <template>
   <div class="book">
     <div class="read-wapper">
-      <div
-        id="read"
-        class="read"
-        ref="read"
-      ></div>
+      <div id="read" class="read" ref="read"></div>
       <BookHead :isShowMenu="isShowMenu"></BookHead>
       <BookMask
         @leftEvent="prevPage"
@@ -33,14 +29,14 @@ import BookMenu from 'components/ebook/ebookMenu.vue'
 export default defineComponent({
   setup() {
     const bookUrl1 = ref('/book/村上春树短篇小说集.epub')
-    const store = useStore()
-    const book = new Epub(bookUrl1.value)
+    const store: any = useStore()
+    const book: any = Epub(bookUrl1.value)
     const rendition = book.renderTo('read', {
-      width: window.innerwidth,
-      height: window.innerwidth
+      width: (window as any).innerwidth,
+      height: window.innerHeight
     })
-    let navigation
-    let locations
+    let navigation: any
+    let locations: any
     rendition.display()
     rendition.on('click', (event: Event) => {
       console.log(event)
@@ -72,7 +68,8 @@ export default defineComponent({
   },
   computed: {
     isShowMenu() {
-      return this.store.state.ebook.isShowMenu
+      const store: any = useStore()
+      return store.state.ebook.isShowMenu
     }
   },
   components: {
@@ -83,17 +80,17 @@ export default defineComponent({
   methods: {
     prevPage() {
       if (this.isShowMenu) {
-        this.store.commit('ebook/toggleEbookMenuState', false)
+        this.store.commit('ebook/setEbookMenuState', false)
       } else {
         this.rendition && this.rendition.prev()
       }
     },
     toggleTitleAndMenu() {
-      this.store.commit('ebook/toggleEbookMenuState')
+      this.store.commit('ebook/setEbookMenuState')
     },
     nextPage() {
       if (this.isShowMenu) {
-        this.store.commit('ebook/toggleEbookMenuState', false)
+        this.store.commit('ebook/setEbookMenuState', false)
       } else {
         this.rendition && this.rendition.next()
       }
@@ -106,7 +103,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.rendition)
+    console.log(this)
   }
 })
 </script>

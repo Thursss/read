@@ -6,13 +6,14 @@
   </transition>
 </template>
 
-<script>
+<script lang='ts'>
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
 export default defineComponent({
-  props: {
-    isShowMoreMenu: {
-      type: Boolean,
-      default: true
+  computed: {
+    isShowMoreMenu() {
+      const store: any = useStore()
+      return store.state.ebook.isShowMoreMenu
     }
   }
 })
@@ -24,7 +25,7 @@ export default defineComponent({
   left: 0;
   bottom: 48rem;
   right: 0;
-  height: 100rem;
+  height: 180rem;
   z-index: 99;
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
