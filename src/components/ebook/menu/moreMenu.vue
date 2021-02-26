@@ -2,19 +2,26 @@
   <transition
     name="slide-up"
   >
-    <div v-show="isShowMoreMenu" class="menu-content"></div>
+    <div v-show="isShowMoreMenu" class="menu-content">
+      <ProgressBar></ProgressBar>
+    </div>
   </transition>
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { useStore } from 'vuex'
+import { useStore, mapState } from 'vuex'
+import { EBookstore } from '@/store/modules/ebook'
+import ProgressBar from 'components/progressBar/index.vue'
+
 export default defineComponent({
   computed: {
-    isShowMoreMenu() {
-      const store: any = useStore()
-      return store.state.ebook.isShowMoreMenu
-    }
+    ...mapState('ebook', {
+      isShowMoreMenu: store => (store as EBookstore).isShowMoreMenu
+    })
+  },
+  components: {
+    ProgressBar
   }
 })
 </script>
@@ -29,5 +36,6 @@ export default defineComponent({
   z-index: 99;
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
+  padding: 15rem 10rem;
 }
 </style>

@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
-// import { EBookstore } from 'store/modules/ebook'
+import { useStore, mapState } from 'vuex'
+import { EBookstore } from '@/store/modules/ebook'
 import Epub from 'epubjs'
 import BookHead from 'components/ebook/ebookHead.vue'
 import BookMask from 'components/ebook/ebookMask.vue'
@@ -67,10 +67,9 @@ export default defineComponent({
     }
   },
   computed: {
-    isShowMenu() {
-      const store: any = useStore()
-      return store.state.ebook.isShowMenu
-    }
+    ...mapState('ebook', {
+      isShowMenu: state => (state as EBookstore).isShowMenu
+    })
   },
   components: {
     BookHead,
@@ -96,8 +95,6 @@ export default defineComponent({
       }
     },
     changBookProgress() {
-      console.log(this.locations)
-
       this.store.commit('ebook/toggleEbookMenuState', false)
       this.rendition && this.locations && this.rendition.display(this.locations.cfiFromPercentage(0.5))
     }

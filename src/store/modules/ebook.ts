@@ -2,7 +2,9 @@ import { createStore } from 'vuex'
 
 export interface EBookstore {
   isShowMenu: boolean,
-  isShowMoreMenu: boolean
+  isShowMoreMenu: boolean,
+  isShowProgressMenu: boolean,
+  readingProgress: number
 }
 
 export default {
@@ -10,7 +12,9 @@ export default {
   state (): EBookstore {
     return {
       isShowMenu: true,
-      isShowMoreMenu: false
+      isShowMoreMenu: false,
+      isShowProgressMenu: true,
+      readingProgress: 10
     }
   },
   mutations: {
@@ -20,6 +24,12 @@ export default {
     setEbookMoreMenuState (state: EBookstore, toggleState?: boolean) {
       state.isShowMoreMenu = (toggleState || !state.isShowMoreMenu)
     },
+    setEbookProgressMenuState (state: EBookstore, toggleState?: boolean) {
+      state.isShowProgressMenu = (toggleState || !state.isShowProgressMenu)
+    },
+    setReadingProgress(state: EBookstore, readingProgress: number) {
+      state.readingProgress = readingProgress
+    }
   },
   actions: {},
 }

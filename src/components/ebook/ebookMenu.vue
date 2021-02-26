@@ -13,14 +13,13 @@
         <ul class="menu-list">
           <li
             class="menu-item"
-            @click="toggleShowMoreMeun"
           >
             <span class="icon-menu"></span>
             <p class="text">目录</p>
           </li>
           <li
             class="menu-item"
-            @click="onProgressChange"
+            @click="toggleShowProgressMeun"
           ><span class="icon-progress"></span>
             <p class="text">进度</p>
           </li>
@@ -32,7 +31,8 @@
           </li>
         </ul>
       </div>
-      <MuenMore></MuenMore>
+      <MoreMuen></MoreMuen>
+      <ProgressMenu></ProgressMenu>
     </div>
   </transition>
 </template>
@@ -40,7 +40,8 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import MuenMore from 'components/ebook/menu/moreMenu.vue'
+import MoreMuen from 'components/ebook/menu/moreMenu.vue'
+import ProgressMenu from 'components/ebook/menu/progressMenu.vue'
 
 export default defineComponent({
   setup () {
@@ -53,7 +54,8 @@ export default defineComponent({
     isShowMenu: Boolean
   },
   components: {
-    MuenMore
+    MoreMuen,
+    ProgressMenu
   },
   methods: {
     onProgressChange () {
@@ -61,6 +63,9 @@ export default defineComponent({
     },
     toggleShowMoreMeun () {
       this.store.commit('ebook/setEbookMoreMenuState')
+    },
+    toggleShowProgressMeun () {
+      this.store.commit('ebook/setEbookProgressMenuState')
     }
   }
 })
