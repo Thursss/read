@@ -2,7 +2,7 @@
   <transition
     name="slide-up"
   >
-    <div v-show="isShowMoreMenu" class="menu-content">
+    <div v-show="isShowMenu && menuMoreShowNumber === 2" class="menu-content">
       <ProgressBar></ProgressBar>
     </div>
   </transition>
@@ -10,16 +10,11 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { useStore, mapState } from 'vuex'
-import { EBookstore } from '@/store/modules/ebook'
+import { EbookMixin } from '@/uitls/ebook/mixin'
 import ProgressBar from 'components/progressBar/index.vue'
 
 export default defineComponent({
-  computed: {
-    ...mapState('ebook', {
-      isShowMoreMenu: store => (store as EBookstore).isShowMoreMenu
-    })
-  },
+  mixins: [EbookMixin],
   components: {
     ProgressBar
   }

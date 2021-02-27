@@ -1,35 +1,51 @@
 import { createStore } from 'vuex'
 
-export interface EBookstore {
+export interface EBookStore {
+  fillName: string,
   isShowMenu: boolean,
-  isShowMoreMenu: boolean,
-  isShowProgressMenu: boolean,
+  menuMoreShowNumber: number,
   readingProgress: number
 }
 
 export default {
   namespaced: true,
-  state (): EBookstore {
+  state (): EBookStore {
     return {
+      fillName: '',
       isShowMenu: true,
-      isShowMoreMenu: false,
-      isShowProgressMenu: true,
+      menuMoreShowNumber: -1,
       readingProgress: 10
     }
   },
   mutations: {
-    setEbookMenuState (state: EBookstore, toggleState?: boolean) {
-      state.isShowMenu = (toggleState || !state.isShowMenu)
+    SET_FILLNAME(state: EBookStore, fillName?: string) {
+      state.fillName = fillName || ''
     },
-    setEbookMoreMenuState (state: EBookstore, toggleState?: boolean) {
-      state.isShowMoreMenu = (toggleState || !state.isShowMoreMenu)
+    SET_MENU_SHOW(state: EBookStore, menuShow?: boolean) {
+      state.isShowMenu = menuShow || !state.isShowMenu
+      if(state.isShowMenu == false) state.menuMoreShowNumber = -1
     },
-    setEbookProgressMenuState (state: EBookstore, toggleState?: boolean) {
-      state.isShowProgressMenu = (toggleState || !state.isShowProgressMenu)
+    SET_MENU_MORE_SHOW(state: EBookStore, menuMoreShowNumber?: number) {
+      // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
+      if (state.menuMoreShowNumber === menuMoreShowNumber) {
+        state.menuMoreShowNumber = -1
+      } else {
+        state.menuMoreShowNumber = menuMoreShowNumber || -1
+      }
     },
-    setReadingProgress(state: EBookstore, readingProgress: number) {
+    setReadingProgress(state: EBookStore, readingProgress: number) {
       state.readingProgress = readingProgress
     }
   },
-  actions: {},
+  actions: {
+    setFillName({ commit }, fillName?: string) {
+      commit('SET_FILLNAME', fillName || '')
+    },
+    setMenuShow({ commit }, menuShow?: string) {
+      commit('SET_MENU_SHOW', menuShow || '')
+    },
+    setMenuMoreShow({ commit }, menuMoreShowNumber?: number) {
+      commit('SET_MENU_MORE_SHOW', menuMoreShowNumber)
+    },
+  },
 }

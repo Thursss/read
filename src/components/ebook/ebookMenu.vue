@@ -19,13 +19,13 @@
           </li>
           <li
             class="menu-item"
-            @click="toggleShowProgressMeun"
+            @click="showMoreMeun(1)"
           ><span class="icon-progress"></span>
             <p class="text">进度</p>
           </li>
           <li
             class="menu-item"
-            @click='toggleShowMoreMeun'
+            @click='showMoreMeun(2)'
           ><span class="icon-more"></span>
             <p class="text">设置</p>
           </li>
@@ -39,33 +39,19 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { useStore } from 'vuex'
+import { EbookMixin } from '@/uitls/ebook/mixin'
 import MoreMuen from 'components/ebook/menu/moreMenu.vue'
 import ProgressMenu from 'components/ebook/menu/progressMenu.vue'
 
 export default defineComponent({
-  setup () {
-    const store: any = useStore()
-    return {
-      store
-    }
-  },
-  props: {
-    isShowMenu: Boolean
-  },
+  mixins: [EbookMixin],
   components: {
     MoreMuen,
     ProgressMenu
   },
   methods: {
-    onProgressChange () {
-      this.$emit('onProgressChangeEvent')
-    },
-    toggleShowMoreMeun () {
-      this.store.commit('ebook/setEbookMoreMenuState')
-    },
-    toggleShowProgressMeun () {
-      this.store.commit('ebook/setEbookProgressMenuState')
+    showMoreMeun (menuMoreShowNumber?: number) {
+      this.setMenuMoreShow(menuMoreShowNumber)
     }
   }
 })

@@ -1,5 +1,4 @@
 <template>
-  <div id="nav"></div>
   <router-view />
 </template>
 
@@ -9,8 +8,8 @@ export default defineComponent({
   methods: {
     setRem() {
       const html: HTMLHtmlElement | null = document.querySelector('html')
-      const fontSize = window.innerWidth / 375
-      // fontSize = fontSize > 5 ? 5 : fontSize
+      let fontSize = window.innerWidth / 375
+      fontSize = fontSize > 5 ? 5 : fontSize
       html && (html.style.fontSize = fontSize + 'px')
     },
     onError(error: ErrorEvent) {

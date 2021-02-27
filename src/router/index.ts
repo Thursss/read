@@ -9,9 +9,15 @@ const routes: Array<RouteRecordRaw> = [
     // component: Home
   },
   {
-    path: "/book",
+    path: "/book/:fillName",
     name: "Book",
-    component: () => import("views/Ebook.vue")
+    component: () => import("views/ebook/index.vue"),
+    // children: [
+    //   {
+    //     path: ':fillname',
+    //     component: () => import("views/ebook/index.vue")
+    //   }
+    // ]
   }
 ]
 

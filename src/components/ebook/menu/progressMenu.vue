@@ -1,43 +1,27 @@
 <template>
   <transition name="slide-up">
     <div
-      v-show="isShowProgressMenu"
       class="menu-content"
+      v-show="isShowMenu && menuMoreShowNumber === 1"
     >
-      <ProgressBar
-        :readingProgress='readingProgress'
-        @onProgreeChange='onProgreeChange'
-      ></ProgressBar>
+      <ProgressBar></ProgressBar>
     </div>
   </transition>
 </template>
 
 <script lang='ts'>
-import { defineComponent, InputHTMLAttributes } from 'vue'
-import { useStore, mapState } from 'vuex'
-import { EBookstore } from '@/store/modules/ebook'
+import { defineComponent } from 'vue'
+import { EbookMixin } from '@/uitls/ebook/mixin'
 import ProgressBar from 'components/progressBar/index.vue'
 
 export default defineComponent({
-  setup() {
-    const store: any = useStore()
-    return {
-      store
-    }
-  },
-  computed: {
-    ...mapState('ebook', {
-      isShowProgressMenu: store => (store as EBookstore).isShowProgressMenu,
-      readingProgress: store => (store as EBookstore).readingProgress
-    })
-  },
+  mixins: [EbookMixin],
   components: {
     ProgressBar
   },
   methods: {
-    onProgreeChange (event: MouseEvent) {
-      const readingProgress = (event.target as InputHTMLAttributes).value as string
-      this.store.commit('ebook/setReadingProgress', parseInt(readingProgress))
+    onProgreeChange(event: MouseEvent) {
+      console.log(event)
     }
   }
 })

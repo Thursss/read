@@ -23,10 +23,10 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { EbookMixin } from '@/uitls/ebook/mixin'
+
 export default defineComponent({
-  props: {
-    isShowMenu: Boolean
-  }
+  mixins: [EbookMixin]
 })
 </script>
 
