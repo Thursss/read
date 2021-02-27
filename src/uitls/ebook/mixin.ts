@@ -7,13 +7,17 @@ export const EbookMixin = {
       fillName: state => (state as EBookStore).fillName,
       isShowMenu: state => (state as EBookStore).isShowMenu,
       menuMoreShowNumber: state => (state as EBookStore).menuMoreShowNumber,
+      ebook: state => (state as EBookStore).ebook,
+      rendition: state => (state as EBookStore).rendition,
     })
   },
   methods: {
     ...mapActions('ebook', [
       'setFillName',
       'setMenuShow',
-      'setMenuMoreShow'
+      'setMenuMoreShow',
+      'setEbook',
+      'setRendition'
     ]),
   }
 }
