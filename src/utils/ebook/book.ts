@@ -1,0 +1,4 @@
+const FONT_SIZE_LIST = []
+const FONT_FAMILY_LIST = []
+
+export { FONT_SIZE_LIST, FONT_FAMILY_LIST }

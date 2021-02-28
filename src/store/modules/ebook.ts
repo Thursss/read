@@ -1,49 +1,40 @@
 import { createStore } from 'vuex'
-
-export interface EBookStore {
-  fillName: string,
-  isShowMenu: boolean,
-  menuMoreShowNumber: number,
-  readingProgress: number,
-  ebook: any | null,
-  rendition: any | null,
-}
+import { EbookStore } from '@/utils/ebook/ebookType'
 
 export default {
   namespaced: true,
-  state (): EBookStore {
+  state (): EbookStore {
     return {
       fillName: '',
       isShowMenu: true,
-      menuMoreShowNumber: -1,
+      menuMoreShowNumber: -1, // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
       readingProgress: 10,
       ebook: null,
       rendition: null
     }
   },
   mutations: {
-    SET_FILL_NAME(state: EBookStore, fillName?: string) {
+    SET_FILL_NAME(state: EbookStore, fillName?: string) {
       state.fillName = fillName || ''
     },
-    SET_MENU_SHOW(state: EBookStore, menuShow?: boolean) {
+    SET_MENU_SHOW(state: EbookStore, menuShow?: boolean) {
       state.isShowMenu = !state.isShowMenu
       if(state.isShowMenu == false) state.menuMoreShowNumber = -1
     },
-    SET_MENU_MORE_SHOW(state: EBookStore, menuMoreShowNumber?: number) {
-      // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
+    SET_MENU_MORE_SHOW(state: EbookStore, menuMoreShowNumber?: number) {
       if (state.menuMoreShowNumber === menuMoreShowNumber) {
         state.menuMoreShowNumber = -1
       } else {
         state.menuMoreShowNumber = menuMoreShowNumber || -1
       }
     },
-    SET_EBOOK(state: EBookStore, ebook?: any | null) {
+    SET_EBOOK(state: EbookStore, ebook?: any | null) {
       state.ebook = ebook
     },
-    SET_RENDITION(state: EBookStore, rendition?: any | null) {
+    SET_RENDITION(state: EbookStore, rendition?: any | null) {
       state.rendition = rendition
     },
-    setReadingProgress(state: EBookStore, readingProgress: number) {
+    setReadingProgress(state: EbookStore, readingProgress: number) {
       state.readingProgress = readingProgress
     }
   },

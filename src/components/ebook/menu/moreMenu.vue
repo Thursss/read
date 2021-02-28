@@ -10,11 +10,11 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { EbookMixin } from '@/uitls/ebook/mixin'
+import { ebookMixin } from '@/utils/ebook/mixin'
 import ProgressBar from 'components/progressBar/index.vue'
 
 export default defineComponent({
-  mixins: [EbookMixin],
+  mixins: [ebookMixin],
   components: {
     ProgressBar
   }

@@ -13,7 +13,7 @@ export default defineComponent({
       html && (html.style.fontSize = fontSize + 'px')
     },
     onError(error: ErrorEvent) {
-      console.log(error)
+      // console.log(error)
       // console.error(`https://www.baidu.com/s?ie=UTF-8&wd='${error.message}'`)
     }
   },

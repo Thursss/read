@@ -39,12 +39,12 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { EbookMixin } from '@/uitls/ebook/mixin'
+import { ebookMixin } from '@/utils/ebook/mixin'
 import MoreMuen from 'components/ebook/menu/moreMenu.vue'
 import ProgressMenu from 'components/ebook/menu/progressMenu.vue'
 
 export default defineComponent({
-  mixins: [EbookMixin],
+  mixins: [ebookMixin],
   components: {
     MoreMuen,
     ProgressMenu

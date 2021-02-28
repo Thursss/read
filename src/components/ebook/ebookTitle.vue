@@ -23,10 +23,10 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { EbookMixin } from '@/uitls/ebook/mixin'
+import { ebookMixin } from '@/utils/ebook/mixin'
 
 export default defineComponent({
-  mixins: [EbookMixin]
+  mixins: [ebookMixin]
 })
 </script>
 

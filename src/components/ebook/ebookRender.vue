@@ -1,19 +1,16 @@
 <template>
-  <div
-    id="read"
-    class="read"
-    ref="read"
-  ></div>
+  <div id="read" class="read" ref="read"></div>
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import { EbookMixin } from '@/uitls/ebook/mixin'
+import { ebookMixin } from '@/utils/ebook/mixin'
+import { setEbookLocalStorage, getEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
 import Epub from 'epubjs'
 // global.epub = Epub
 
 export default defineComponent({
-  mixins: [EbookMixin],
+  mixins: [ebookMixin],
   methods: {
     initEpub() {
       let startTimeStamp: number
@@ -25,7 +22,9 @@ export default defineComponent({
         height: innerHeight,
         method: 'default'
       })
-      rendition.display()
+      rendition.display().then(() => {
+        console.log(getEbookLocalStorage(this.fillName, 'fontFamily'))
+      })
 
       // 触摸开始
       rendition.on('touchstart', (event: TouchEvent) => {
@@ -55,7 +54,10 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.setFillName(`/ebook/${this.$route.params.fillName}.epub`).then(() => {
+    const fillName = `/ebook/${this.$route.params.fillName}.epub`
+    this.setFillName(fillName).then(() => {
+      setEbookLocalStorage(fillName, 'fontSize', 10)
+      setEbookLocalStorage(fillName, 'fontFamily', '凌云行书')
       this.initEpub()
     })
   }
