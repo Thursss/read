@@ -4,6 +4,8 @@
   >
     <div v-show="isShowMenu && menuMoreShowNumber === 2" class="menu-content">
       <DotProgressBar></DotProgressBar>
+      <div class="box"></div>
+      <FontFamilyBar></FontFamilyBar>
     </div>
   </transition>
 </template>
@@ -12,11 +14,13 @@
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
 import DotProgressBar from 'components/dotProgressBar/index.vue'
+import FontFamilyBar from 'components/ebook/menu/fontFamilyBar.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
-    DotProgressBar
+    DotProgressBar,
+    FontFamilyBar
   }
 })
 </script>
@@ -32,5 +36,8 @@ export default defineComponent({
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
   padding: 15rem 10rem;
+}
+.box{
+  height: 15rem;
 }
 </style>

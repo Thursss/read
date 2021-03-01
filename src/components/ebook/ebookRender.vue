@@ -29,9 +29,7 @@ export default defineComponent({
       })
 
       rendition.display().then(() => {
-        let fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber')
-        if (fontListNumber == null) fontListNumber = this.defaultFontSizeListNumber
-        rendition.themes.fontSize(FONT_SIZE_LIST[fontListNumber]['fontSize'])
+        this.setFontSize()
       })
       // 触摸开始
       rendition.on('touchstart', (event: TouchEvent) => {
@@ -58,6 +56,11 @@ export default defineComponent({
       // 把book相关对象保存到vuex里
       this.setEbook(book)
       this.setRendition(rendition)
+    },
+    setFontSize() {
+      let fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber')
+      if (fontListNumber == null) fontListNumber = this.defaultFontSizeListNumber
+      this.rendition.themes.fontSize(FONT_SIZE_LIST[fontListNumber]['fontSize'])
     }
   },
   mounted() {

@@ -9,7 +9,7 @@
     <div class="bar-wapper">
       <div
         class="line"
-        v-for="(value, index) in length"
+        v-for="(value, index) in FONT_SIZE_LIST"
         :key="index"
         @click="dotClick(index)"
       >
@@ -45,7 +45,7 @@ export default defineComponent({
   data() {
     return {
       i: 2,
-      length: FONT_SIZE_LIST.length
+      FONT_SIZE_LIST: FONT_SIZE_LIST
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default defineComponent({
       if (this.i > 0) this.i--
     },
     add() {
-      if (this.i < this.length - 1) this.i++
+      if (this.i < this.FONT_SIZE_LIST.length - 1) this.i++
     }
   },
   watch: {
