@@ -29,11 +29,10 @@ export default defineComponent({
       })
 
       rendition.display().then(() => {
-        // const fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber
-        // rendition.themes.fontSize(FONT_SIZE_LIST[getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber]['fontSize'])
-        console.log(FONT_SIZE_LIST[getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber]['fontSize'])
+        let fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber')
+        if (fontListNumber == null) fontListNumber = this.defaultFontSizeListNumber
+        rendition.themes.fontSize(FONT_SIZE_LIST[fontListNumber]['fontSize'])
       })
-
       // 触摸开始
       rendition.on('touchstart', (event: TouchEvent) => {
         if (event.changedTouches.length > 1) return
@@ -45,7 +44,6 @@ export default defineComponent({
         if (event.changedTouches.length > 1) return
         const TimeStamp = event.timeStamp - startTimeStamp
         const MoveX = (event.changedTouches as TouchList)[0].clientX - startMoveX
-        console.log(TimeStamp, MoveX)
 
         if (TimeStamp > 50 && MoveX < -40) {
           if (this.isShowMenu) this.setMenuShow()
@@ -56,10 +54,10 @@ export default defineComponent({
         } else {
           this.setMenuShow()
         }
-        // 把book相关对象保存到vuex里
-        this.setEbook(book)
-        this.setRendition(rendition)
       })
+      // 把book相关对象保存到vuex里
+      this.setEbook(book)
+      this.setRendition(rendition)
     }
   },
   mounted() {
