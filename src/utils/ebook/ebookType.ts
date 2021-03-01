@@ -1,8 +1,9 @@
 export interface EbookStore {
   fillName: string,
-  isShowMenu: boolean,
-  menuMoreShowNumber: number,
-  readingProgress: number,
+  isShowMenu: boolean | null,
+  menuMoreShowNumber: number | null,
   ebook: any | null,
   rendition: any | null,
+  readingProgress: number,
+  defaultFontSizeListNumber: number,
 }

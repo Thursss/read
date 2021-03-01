@@ -3,7 +3,7 @@
     name="slide-up"
   >
     <div v-show="isShowMenu && menuMoreShowNumber === 2" class="menu-content">
-      <ProgressBar></ProgressBar>
+      <DotProgressBar></DotProgressBar>
     </div>
   </transition>
 </template>
@@ -11,12 +11,12 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
-import ProgressBar from 'components/progressBar/index.vue'
+import DotProgressBar from 'components/dotProgressBar/index.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
-    ProgressBar
+    DotProgressBar
   }
 })
 </script>

@@ -10,7 +10,8 @@ export default {
       menuMoreShowNumber: -1, // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
       readingProgress: 10,
       ebook: null,
-      rendition: null
+      rendition: null,
+      defaultFontSizeListNumber: 2
     }
   },
   mutations: {
@@ -28,10 +29,10 @@ export default {
         state.menuMoreShowNumber = menuMoreShowNumber || -1
       }
     },
-    SET_EBOOK(state: EbookStore, ebook?: any | null) {
+    SET_EBOOK(state: EbookStore, ebook?: any) {
       state.ebook = ebook
     },
-    SET_RENDITION(state: EbookStore, rendition?: any | null) {
+    SET_RENDITION(state: EbookStore, rendition?: any) {
       state.rendition = rendition
     },
     setReadingProgress(state: EbookStore, readingProgress: number) {
@@ -48,10 +49,10 @@ export default {
     setMenuMoreShow({ commit }, menuMoreShowNumber?: number) {
       commit('SET_MENU_MORE_SHOW', menuMoreShowNumber)
     },
-    setEbook({ commit }, ebook?: any | null) {
+    setEbook({ commit }, ebook?: any) {
       commit('SET_EBOOK', ebook)
     },
-    setRendition({ commit }, rendition?: any | null) {
+    setRendition({ commit }, rendition?: any) {
       commit('SET_RENDITION', rendition)
     },
   },

@@ -8,7 +8,8 @@ export const ebookMixin = {
       isShowMenu: state => (state as EbookStore).isShowMenu,
       menuMoreShowNumber: state => (state as EbookStore).menuMoreShowNumber,
       ebook: state => (state as EbookStore).ebook,
-      rendition: state => (state as EbookStore).rendition
+      rendition: state => (state as EbookStore).rendition,
+      defaultFontSizeListNumber: state => (state as EbookStore).defaultFontSizeListNumber,
     })
   },
   methods: {

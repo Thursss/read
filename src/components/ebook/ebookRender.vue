@@ -1,11 +1,16 @@
 <template>
-  <div id="read" class="read" ref="read"></div>
+  <div
+    id="read"
+    class="read"
+    ref="read"
+  ></div>
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
 import { setEbookLocalStorage, getEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
+import { FONT_SIZE_LIST } from '@/utils/ebook/book'
 import Epub from 'epubjs'
 // global.epub = Epub
 
@@ -22,8 +27,11 @@ export default defineComponent({
         height: innerHeight,
         method: 'default'
       })
+
       rendition.display().then(() => {
-        console.log(getEbookLocalStorage(this.fillName, 'fontFamily'))
+        // const fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber
+        // rendition.themes.fontSize(FONT_SIZE_LIST[getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber]['fontSize'])
+        console.log(FONT_SIZE_LIST[getEbookLocalStorage(this.fillName + '-info', 'fontListNumber') || this.defaultFontSizeListNumber]['fontSize'])
       })
 
       // 触摸开始
@@ -37,6 +45,8 @@ export default defineComponent({
         if (event.changedTouches.length > 1) return
         const TimeStamp = event.timeStamp - startTimeStamp
         const MoveX = (event.changedTouches as TouchList)[0].clientX - startMoveX
+        console.log(TimeStamp, MoveX)
+
         if (TimeStamp > 50 && MoveX < -40) {
           if (this.isShowMenu) this.setMenuShow()
           rendition.next()
@@ -46,18 +56,15 @@ export default defineComponent({
         } else {
           this.setMenuShow()
         }
+        // 把book相关对象保存到vuex里
+        this.setEbook(book)
+        this.setRendition(rendition)
       })
-
-      // 把book相关对象保存到vuex里
-      this.setEbook(book)
-      this.setRendition(rendition)
     }
   },
   mounted() {
     const fillName = `/ebook/${this.$route.params.fillName}.epub`
     this.setFillName(fillName).then(() => {
-      setEbookLocalStorage(fillName, 'fontSize', 10)
-      setEbookLocalStorage(fillName, 'fontFamily', '凌云行书')
       this.initEpub()
     })
   }
