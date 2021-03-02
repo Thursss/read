@@ -11,7 +11,7 @@ export default {
       readingProgress: 10,
       ebook: null,
       rendition: null,
-      defaultFontSizeListNumber: 2
+      defaultFontSizeListIndex: 2
     }
   },
   mutations: {

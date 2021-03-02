@@ -58,9 +58,9 @@ export default defineComponent({
       this.setRendition(rendition)
     },
     setFontSize() {
-      let fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber')
-      if (fontListNumber == null) fontListNumber = this.defaultFontSizeListNumber
-      this.rendition.themes.fontSize(FONT_SIZE_LIST[fontListNumber]['fontSize'])
+      let fontListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontListIndex')
+      if (fontListIndex == null) fontListIndex = this.defaultFontSizeListIndex
+      this.rendition.themes.fontSize(FONT_SIZE_LIST[fontListIndex]['fontSize'])
     }
   },
   mounted() {

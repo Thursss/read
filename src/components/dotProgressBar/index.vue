@@ -61,14 +61,14 @@ export default defineComponent({
   },
   watch: {
     i() {
-      setEbookLocalStorage(this.fillName + '-info', 'fontListNumber', this.i)
+      setEbookLocalStorage(this.fillName + '-info', 'fontListIndex', this.i)
       this.rendition && this.rendition.themes.fontSize(FONT_SIZE_LIST[this.i]['fontSize'])
     }
   },
   mounted() {
-    let fontListNumber = getEbookLocalStorage(this.fillName + '-info', 'fontListNumber')
-    if (fontListNumber == null) fontListNumber = this.defaultFontSizeListNumber
-    this.i = fontListNumber
+    let fontListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontListIndex')
+    if (fontListIndex == null) fontListIndex = this.defaultFontSizeListIndex
+    this.i = fontListIndex
   }
 })
 </script>

@@ -1,15 +1,11 @@
-import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
+import { getLocalStorage, setLocalStorage, setLocalStorageObject, getEbookLocalStorageObject } from '@/utils/localStorage'
+import { EbookLocalStorageType } from '@/utils/ebook/ebookType'
 
-function setEbookLocalStorage (fillName: string, key: string, value: any) {
-  let ebookInfo = getLocalStorage(fillName)
-  if (!ebookInfo) ebookInfo = {}
-  ebookInfo[key] = value
-  setLocalStorage(fillName ,ebookInfo)
+function setEbookLocalStorage (fillName: string, key: EbookLocalStorageType, value: any) {
+  setLocalStorageObject(fillName, key, value)
 }
 
-function getEbookLocalStorage(fillName: string, key: string): any {
-  const ebookInfo = getLocalStorage(fillName)
-  if (!ebookInfo) return null
-  return ebookInfo[key]
+function getEbookLocalStorage(fillName: string, key: EbookLocalStorageType) {
+  return getEbookLocalStorageObject(fillName, key)
 }
  export { setEbookLocalStorage, getEbookLocalStorage }

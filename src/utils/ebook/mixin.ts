@@ -9,7 +9,7 @@ export const ebookMixin = {
       menuMoreShowNumber: state => (state as EbookStore).menuMoreShowNumber,
       ebook: state => (state as EbookStore).ebook,
       rendition: state => (state as EbookStore).rendition,
-      defaultFontSizeListNumber: state => (state as EbookStore).defaultFontSizeListNumber,
+      defaultFontSizeListIndex: state => (state as EbookStore).defaultFontSizeListIndex,
     })
   },
   methods: {
