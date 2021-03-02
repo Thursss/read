@@ -3,9 +3,11 @@
     name="slide-up"
   >
     <div v-show="isShowMenu && menuMoreShowNumber === 2" class="menu-content">
-      <DotProgressBar></DotProgressBar>
+      <FontSizeBar></FontSizeBar>
       <div class="box"></div>
       <FontFamilyBar></FontFamilyBar>
+      <div class="box"></div>
+      <ThemeBar></ThemeBar>
     </div>
   </transition>
 </template>
@@ -13,14 +15,16 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
-import DotProgressBar from 'components/dotProgressBar/index.vue'
+import FontSizeBar from 'components/ebook/menu/fontSizeBar.vue'
 import FontFamilyBar from 'components/ebook/menu/fontFamilyBar.vue'
+import ThemeBar from 'components/ebook/menu/themeBar.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
-    DotProgressBar,
-    FontFamilyBar
+    FontSizeBar,
+    FontFamilyBar,
+    ThemeBar
   }
 })
 </script>
@@ -31,7 +35,7 @@ export default defineComponent({
   left: 0;
   bottom: 48rem;
   right: 0;
-  height: 180rem;
+  height: 130rem;
   z-index: 99;
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);

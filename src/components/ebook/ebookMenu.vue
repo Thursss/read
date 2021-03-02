@@ -9,7 +9,7 @@
       @click.stop
       class="ebook-menu"
     >
-      <div class="menu-wapper">
+      <div class="menu-wapper" :style="{'box-shadow': menuMoreShowNumber == -1 ? '1rem -4rem 8rem rgba(0, 0, 0, 0.2)' : 'none'}">
         <ul class="menu-list">
           <li
             class="menu-item"

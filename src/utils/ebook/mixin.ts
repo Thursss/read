@@ -10,6 +10,8 @@ export const ebookMixin = {
       ebook: state => (state as EbookStore).ebook,
       rendition: state => (state as EbookStore).rendition,
       defaultFontSizeListIndex: state => (state as EbookStore).defaultFontSizeListIndex,
+      defaultFontFamilyListIndex: state => (state as EbookStore).defaultFontFamilyListIndex,
+      defaultThemeListIndex: state => (state as EbookStore).defaultThemeListIndex,
     })
   },
   methods: {

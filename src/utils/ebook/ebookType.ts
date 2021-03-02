@@ -6,6 +6,8 @@ export interface EbookStore {
   rendition: any | null,
   readingProgress: number,
   defaultFontSizeListIndex: number,
+  defaultFontFamilyListIndex: number,
+  defaultThemeListIndex: number,
 }
 
-export type EbookLocalStorageType = 'fontListIndex' | 'fontFamily' | 'theme'
+export type EbookLocalStorageType = 'fontListIndex' | 'fontFamilyIndex' | 'theme'

@@ -21,7 +21,7 @@ export default defineComponent({
       let startTimeStamp: number
       let startMoveX: number
 
-      const book: any = Epub(this.fillName)
+      const book: any = Epub(`/ebook/${this.fillName}.epub`)
       const rendition: any = book.renderTo('read', {
         width: innerWidth,
         height: innerHeight,
@@ -65,7 +65,7 @@ export default defineComponent({
   },
   mounted() {
     const fillName = `/ebook/${this.$route.params.fillName}.epub`
-    this.setFillName(fillName).then(() => {
+    this.setFillName(this.$route.params.fillName).then(() => {
       this.initEpub()
     })
   }

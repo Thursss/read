@@ -1,9 +1,11 @@
 <template>
   <div class="font-family-wapper">
     <div
-      v-for="(fontFamily, i) in FONT_FAMILY_LIST"
-      :key="i"
       class="font-family-item"
+      v-for="(fontFamily, index) in FONT_FAMILY_LIST"
+      :key="index"
+      :class="{on: index == i}"
+      @click="setIndex(index)"
     >
       <span
         class="text"
@@ -15,13 +17,33 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
+import { ebookMixin } from '@/utils/ebook/mixin'
+import { setEbookLocalStorage, getEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
 import { FONT_FAMILY_LIST } from '@/utils/ebook/book'
 
 export default defineComponent({
+  mixins: [ebookMixin],
   data() {
     return {
+      i: 1,
       FONT_FAMILY_LIST: FONT_FAMILY_LIST
     }
+  },
+  methods: {
+    setIndex(index) {
+      this.i = index
+    }
+  },
+  watch: {
+    i() {
+      setEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex', this.i)
+      // this.rendition && this.rendition.themes.fontSize(FONT_FAMILY_LIST[this.i]['fontFamily'])
+    }
+  },
+  mounted() {
+    let FontFamilyListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
+    if (FontFamilyListIndex == null) FontFamilyListIndex = this.defaultFontFamilyListIndex
+    this.i = FontFamilyListIndex
   }
 })
 </script>
@@ -42,6 +64,10 @@ export default defineComponent({
     border: 1px solid rgba(34, 34, 34, 0.2);
     padding: 5rem 10rem;
     border-radius: 2rem;
+    &.on {
+      border-color: rgb(112, 255, 255);
+      color: aqua;
+    }
   }
 }
 </style>
