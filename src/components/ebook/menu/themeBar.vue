@@ -7,7 +7,10 @@
       :class="{on: index == i}"
       @click="setIndex(index)"
     >
-      <span class="ui" :style="{'background-color': theme['body']['background-color'], 'border-color': '#222'}"></span>
+      <span
+        class="ui"
+        :style="{'background-color': theme['body']['background-color'], 'border-color': '#222'}"
+      ></span>
       <span class="text">{{theme['alias']}}</span>
     </div>
   </div>
@@ -61,9 +64,11 @@ export default defineComponent({
     line-height: 15rem;
     padding: 0 5rem;
     border-radius: 2rem;
+    border-color: #666;
+    color: #666;
     &.on {
-      border-color: rgb(112, 255, 255);
-      color: aqua;
+      border-color: #000;
+      color: #000;
     }
     .ui {
       display: block;
@@ -72,7 +77,7 @@ export default defineComponent({
       height: 20rem;
       margin-bottom: 5rem;
       border: 1px solid #111;
-      border-color: #222
+      border-color: #222;
     }
   }
 }

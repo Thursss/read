@@ -37,13 +37,13 @@ export default defineComponent({
   watch: {
     i() {
       setEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex', this.i)
-      // this.rendition && this.rendition.themes.fontSize(FONT_FAMILY_LIST[this.i]['fontFamily'])
+      this.rendition && this.rendition.themes.font(FONT_FAMILY_LIST[this.i]['fontFamily'])
     }
   },
   mounted() {
-    let FontFamilyListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
-    if (FontFamilyListIndex == null) FontFamilyListIndex = this.defaultFontFamilyListIndex
-    this.i = FontFamilyListIndex
+    let fontFamilyListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
+    if (fontFamilyListIndex == null) fontFamilyListIndex = this.defaultFontFamilyListIndex
+    this.i = fontFamilyListIndex
   }
 })
 </script>
@@ -64,9 +64,11 @@ export default defineComponent({
     border: 1px solid rgba(34, 34, 34, 0.2);
     padding: 5rem 10rem;
     border-radius: 2rem;
+    border-color: #666;
+    color: #666;
     &.on {
-      border-color: rgb(112, 255, 255);
-      color: aqua;
+      border-color: #000;
+      color: #000;
     }
   }
 }

@@ -9,7 +9,7 @@ export default defineComponent({
     setRem() {
       const html: HTMLHtmlElement | null = document.querySelector('html')
       let fontSize = window.innerWidth / 375
-      fontSize = fontSize > 5 ? 5 : fontSize
+      fontSize = fontSize > 1.75 ? 1.75 : fontSize
       html && (html.style.fontSize = fontSize + 'px')
     },
     onError(error: ErrorEvent) {

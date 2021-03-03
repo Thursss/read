@@ -1,16 +1,26 @@
 const FONT_SIZE_LIST = [
-  { fontSize: 12 },
   { fontSize: 14 },
   { fontSize: 16 },
   { fontSize: 18 },
   { fontSize: 20 },
   { fontSize: 22 },
   { fontSize: 24 },
+  { fontSize: 26 }
 ]
 const FONT_FAMILY_LIST = [
-  { fontFamily: '黑体' },
-  { fontFamily: '凌云行书' },
-  { fontFamily: '微软雅黑' }
+  {
+    alias: '默认',
+    fontFamily: '微软雅黑'
+  },
+  {
+    alias: '黑体',
+    fontFamily: '黑体'
+  },
+  {
+    alias: '凌云行书',
+    fontFamily: '凌云行书',
+    url: 'font/FZSJ-LINGYXS.css'
+  },
 ]
 const THEME_LIST = [
   {
