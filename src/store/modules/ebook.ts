@@ -6,9 +6,9 @@ export default {
   state (): EbookStore {
     return {
       fillName: '',
-      isShowMenu: true,
+      isShowMenu: false,
       menuMoreShowNumber: -1, // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
-      readingProgress: 10,
+      readingProgress: 0,
       ebook: null,
       rendition: null,
       defaultFontSizeListIndex: 2,
@@ -39,7 +39,7 @@ export default {
       state.rendition = rendition
     },
     SET_READING_PROGRESS(state: EbookStore, readingProgress: number) {
-      state.readingProgress = readingProgress || 0
+      state.readingProgress = readingProgress
     },
     SET_PROGRESS_ABLED(state: EbookStore, progressAbled: boolean) {
       state.progressAbled = progressAbled
@@ -61,7 +61,7 @@ export default {
     setRendition({ commit }, rendition?: any) {
       commit('SET_RENDITION', rendition)
     },
-    setReadingProgress({ commit }, readingProgress?: number) {
+    setReadingProgress({ commit }, readingProgress: number) {
       commit('SET_READING_PROGRESS', readingProgress)
     },
     setProgressAbled({ commit }, progressAbled?: number) {

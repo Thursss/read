@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="read"
-    class="read"
-    ref="read"
-  ></div>
+  <div id="read" class="read" ref="read"></div>
 </template>
 
 <script lang='ts'>
@@ -41,7 +37,6 @@ export default defineComponent({
         this.setFontSize()
         this.setFontFamily()
         this.setTheme()
-        this.setProgress()
         this.addTouchEvent()
       })
 
@@ -51,7 +46,8 @@ export default defineComponent({
         if (fontSizeIndex == null) fontSizeIndex = this.defaultFontSizeListIndex
         return this.ebook.locations.generate(750 * (innerWidth / 375) * (FONT_SIZE_LIST[fontSizeIndex]['fontSize'] / 16))
       }).then((locations) => {
-        console.log(locations)
+        // console.log(locations)
+        this.setProgress()
       })
     },
     setFontSize() {
@@ -74,7 +70,8 @@ export default defineComponent({
       if (readingProgress == null) readingProgress = this.readingProgress
       this.setReadingProgress(readingProgress)
       this.setProgressAbled(false)
-      // this.rendition.themes.font(FONT_FAMILY_LIST[fontFamilyIndex]['fontFamily'])
+      const cfi = this.ebook.locations.cfiFromPercentage(readingProgress / 100)
+      this.rendition.display(cfi)
     },
     addTouchEvent() {
       let startTimeStamp: number

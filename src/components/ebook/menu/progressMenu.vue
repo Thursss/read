@@ -26,12 +26,15 @@ export default defineComponent({
     ProgressBar
   },
   methods: {
-    onProgreeChange(value: number) {
-      console.log(getEbookLocalStorage(`${this.fillName}-info`, 'readingProgress'))
+    onProgreeChange(value) {
+      const cfi = this.ebook.locations.cfiFromPercentage(value / 100)
+      this.rendition.display(cfi)
     },
-    onProgreeInput(value: number) {
-      this.setReadingProgress(value)
-      setEbookLocalStorage(`${this.fillName}-info`, 'readingProgress', value)
+    onProgreeInput(value) {
+      value = parseInt(value)
+      this.setReadingProgress(value).then(() => {
+        setEbookLocalStorage(`${this.fillName}-info`, 'readingProgress', value)
+      })
     }
   }
 })
