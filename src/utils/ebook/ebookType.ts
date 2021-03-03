@@ -8,6 +8,7 @@ export interface EbookStore {
   defaultFontSizeListIndex: number,
   defaultFontFamilyListIndex: number,
   defaultThemeListIndex: number,
+  progressAbled: boolean | null
 }
 
-export type EbookLocalStorageType = 'fontListIndex' | 'fontFamilyIndex' | 'theme'
+export type EbookLocalStorageType = 'fontSizeIndex' | 'fontFamilyIndex' | 'theme' | 'readingProgress'

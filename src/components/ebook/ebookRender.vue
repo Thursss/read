@@ -18,21 +18,11 @@ export default defineComponent({
   mixins: [ebookMixin],
   methods: {
     initEpub() {
-      let startTimeStamp: number
-      let startMoveX: number
-
       const book: any = Epub(`${process.env.VUE_APP_RES_URL}/ebook/${this.fillName}.epub`)
       const rendition: any = book.renderTo('read', {
         width: innerWidth,
         height: innerHeight,
         method: 'default'
-      })
-
-
-      rendition.display().then(() => {
-        this.setFontSize()
-        this.setFontFamily()
-        this.setTheme()
       })
 
       // 添加字体文件
@@ -42,43 +32,32 @@ export default defineComponent({
         })
       })
 
-      // 触摸开始
-      rendition.on('touchstart', (event: TouchEvent) => {
-        if (event.changedTouches.length > 1) return
-        startTimeStamp = event.timeStamp
-        startMoveX = (event.changedTouches as TouchList)[0].clientX
-        // 阻止冒泡和默认事件
-        event.stopPropagation()
-        event.preventDefault()
-      })
-      // 触摸结束
-      rendition.on('touchend', (event: TouchEvent) => {
-        if (event.changedTouches.length > 1) return
-        const TimeStamp = event.timeStamp - startTimeStamp
-        const MoveX = (event.changedTouches as TouchList)[0].clientX - startMoveX
-
-        if (TimeStamp > 50 && MoveX < -40) {
-          if (this.isShowMenu) this.setMenuShow()
-          rendition.next()
-        } else if (TimeStamp > 50 && MoveX > 40) {
-          if (this.isShowMenu) this.setMenuShow()
-          rendition.prev()
-        } else {
-          this.setMenuShow()
-        }
-        // 阻止冒泡和默认事件
-        event.stopPropagation()
-        event.preventDefault()
-      })
-
       // 把book相关对象保存到vuex里
       this.setEbook(book)
       this.setRendition(rendition)
+
+      // 渲染book
+      rendition.display().then(() => {
+        this.setFontSize()
+        this.setFontFamily()
+        this.setTheme()
+        this.setProgress()
+        this.addTouchEvent()
+      })
+
+      book.ready.then(() => {
+        //通过自带的钩子函数  回调返回locations对象
+        let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeIndex')
+        if (fontSizeIndex == null) fontSizeIndex = this.defaultFontSizeListIndex
+        return this.ebook.locations.generate(750 * (innerWidth / 375) * (FONT_SIZE_LIST[fontSizeIndex]['fontSize'] / 16))
+      }).then((locations) => {
+        console.log(locations)
+      })
     },
     setFontSize() {
-      let fontListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontListIndex')
-      if (fontListIndex == null) fontListIndex = this.defaultFontSizeListIndex
-      this.rendition.themes.fontSize(FONT_SIZE_LIST[fontListIndex]['fontSize'])
+      let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeIndex')
+      if (fontSizeIndex == null) fontSizeIndex = this.defaultFontSizeListIndex
+      this.rendition.themes.fontSize(FONT_SIZE_LIST[fontSizeIndex]['fontSize'])
     },
     setFontFamily() {
       let fontFamilyIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
@@ -90,6 +69,45 @@ export default defineComponent({
       if (themeListIndex == null) themeListIndex = this.defaultThemeListIndex
       // this.rendition.themes.font(FONT_FAMILY_LIST[themeListIndex]['fontFamily'])
     },
+    setProgress() {
+      let readingProgress = getEbookLocalStorage(this.fillName + '-info', 'readingProgress')
+      if (readingProgress == null) readingProgress = this.readingProgress
+      this.setReadingProgress(readingProgress)
+      this.setProgressAbled(false)
+      // this.rendition.themes.font(FONT_FAMILY_LIST[fontFamilyIndex]['fontFamily'])
+    },
+    addTouchEvent() {
+      let startTimeStamp: number
+      let startMoveX: number
+      // 触摸开始
+      this.rendition.on('touchstart', (event: TouchEvent) => {
+        if (event.changedTouches.length > 1) return
+        startTimeStamp = event.timeStamp
+        startMoveX = (event.changedTouches as TouchList)[0].clientX
+        // 阻止冒泡和默认事件
+        event.stopPropagation()
+        // event.preventDefault()
+      })
+      // 触摸结束
+      this.rendition.on('touchend', (event: TouchEvent) => {
+        if (event.changedTouches.length > 1) return
+        const TimeStamp = event.timeStamp - startTimeStamp
+        const MoveX = (event.changedTouches as TouchList)[0].clientX - startMoveX
+
+        if (TimeStamp > 50 && MoveX < -40) {
+          if (this.isShowMenu) this.setMenuShow()
+          this.rendition.next()
+        } else if (TimeStamp > 50 && MoveX > 40) {
+          if (this.isShowMenu) this.setMenuShow()
+          this.rendition.prev()
+        } else {
+          this.setMenuShow()
+        }
+        // 阻止冒泡和默认事件
+        event.stopPropagation()
+        // event.preventDefault()
+      })
+    }
   },
   mounted() {
     this.setFillName(this.$route.params.fillName).then(() => {

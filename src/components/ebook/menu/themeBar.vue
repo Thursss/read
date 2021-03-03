@@ -9,7 +9,7 @@
     >
       <span
         class="ui"
-        :style="{'background-color': theme['body']['background-color'], 'border-color': '#222'}"
+        :style="{'background-color': theme['style']['body']['background'], 'border-color': '#222'}"
       ></span>
       <span class="text">{{theme['alias']}}</span>
     </div>

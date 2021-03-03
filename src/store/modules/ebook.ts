@@ -14,6 +14,7 @@ export default {
       defaultFontSizeListIndex: 2,
       defaultFontFamilyListIndex: 0,
       defaultThemeListIndex: 0,
+      progressAbled: true
     }
   },
   mutations: {
@@ -37,9 +38,12 @@ export default {
     SET_RENDITION(state: EbookStore, rendition?: any) {
       state.rendition = rendition
     },
-    setReadingProgress(state: EbookStore, readingProgress: number) {
-      state.readingProgress = readingProgress
-    }
+    SET_READING_PROGRESS(state: EbookStore, readingProgress: number) {
+      state.readingProgress = readingProgress || 0
+    },
+    SET_PROGRESS_ABLED(state: EbookStore, progressAbled: boolean) {
+      state.progressAbled = progressAbled
+    },
   },
   actions: {
     setFillName({ commit }, fillName?: string) {
@@ -56,6 +60,12 @@ export default {
     },
     setRendition({ commit }, rendition?: any) {
       commit('SET_RENDITION', rendition)
+    },
+    setReadingProgress({ commit }, readingProgress?: number) {
+      commit('SET_READING_PROGRESS', readingProgress)
+    },
+    setProgressAbled({ commit }, progressAbled?: number) {
+      commit('SET_PROGRESS_ABLED', progressAbled)
     },
   },
 }

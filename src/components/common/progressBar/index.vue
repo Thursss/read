@@ -10,7 +10,9 @@
         step="1"
         :value="readingProgress"
         :style="{ 'background-size': `${readingProgress}% 100%` }"
+        :disabled="progressAbled"
         @input="onInput"
+        @change="onChange"
       />
       <p class="but next">下一章</p>
     </div>
@@ -21,18 +23,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, InputHTMLAttributes } from 'vue'
+import { throttle} from '@/utils/conmon'
+import { ebookMixin } from '@/utils/ebook/mixin'
 
 export default defineComponent({
   props: {
     readingProgress: {
       type: Number,
       default: 0
+    },
+    progressAbled: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    onInput (event: MouseEvent) {
-      this.$emit('onProgreeChange', event)
+    onInput: throttle(function (...arg) {
+      this.$emit('onProgreeInput', (arg[0].target as InputHTMLAttributes).value)
+    }, 200),
+    onChange(event: Event) {
+      this.$emit('onProgreeChange', (event.target as InputHTMLAttributes).value)
     }
   }
 })

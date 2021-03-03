@@ -25,16 +25,20 @@ const FONT_FAMILY_LIST = [
 const THEME_LIST = [
   {
     alias: '默认',
-    body: {
-      backgroundColor: '#ccc',
-      textColor: '#ccc'
+    style: {
+      body: {
+        background: '#ccc',
+        textColor: '#ccc'
+      }
     }
   },
   {
     alias: '护眼',
-    body: {
-      'background-color': '#cfc',
-      'color': '#999'
+    style: {
+      body: {
+        background: '#cfc',
+        color: '#999'
+      }
     }
   },
 ]

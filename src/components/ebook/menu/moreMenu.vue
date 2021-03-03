@@ -35,7 +35,6 @@ export default defineComponent({
   left: 0;
   bottom: 48rem;
   right: 0;
-  height: 130rem;
   z-index: 99;
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);

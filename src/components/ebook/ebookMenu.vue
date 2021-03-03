@@ -9,11 +9,12 @@
       @click.stop
       class="ebook-menu"
     >
-      <div class="menu-wapper" :style="{'box-shadow': menuMoreShowNumber == -1 ? '1rem -4rem 8rem rgba(0, 0, 0, 0.2)' : 'none'}">
+      <div
+        class="menu-wapper"
+        :style="{'box-shadow': menuMoreShowNumber == -1 ? '1rem -4rem 8rem rgba(0, 0, 0, 0.2)' : 'none'}"
+      >
         <ul class="menu-list">
-          <li
-            class="menu-item"
-          >
+          <li class="menu-item">
             <span class="icon-menu"></span>
             <p class="text">目录</p>
           </li>
@@ -32,7 +33,9 @@
         </ul>
       </div>
       <MoreMuen></MoreMuen>
-      <ProgressMenu></ProgressMenu>
+      <ProgressMenu
+
+      ></ProgressMenu>
     </div>
   </transition>
 </template>
@@ -50,7 +53,7 @@ export default defineComponent({
     ProgressMenu
   },
   methods: {
-    showMoreMeun (menuMoreShowNumber?: number) {
+    showMoreMeun(menuMoreShowNumber?: number) {
       this.setMenuMoreShow(menuMoreShowNumber)
     }
   }
@@ -68,7 +71,7 @@ export default defineComponent({
     background-color: #ccc;
     box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
     z-index: 101;
-    height: 48rem;
+    padding: 10rem 0;
     .menu-list {
       display: flex;
       height: 100%;

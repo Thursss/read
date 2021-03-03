@@ -4,7 +4,12 @@
       class="menu-content"
       v-show="isShowMenu && menuMoreShowNumber === 1"
     >
-      <ProgressBar></ProgressBar>
+      <ProgressBar
+        :readingProgress='readingProgress'
+        :progressAbled='progressAbled'
+        @onProgreeInput='onProgreeInput'
+        @onProgreeChange='onProgreeChange'
+      ></ProgressBar>
     </div>
   </transition>
 </template>
@@ -12,7 +17,8 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
-import ProgressBar from 'components/progressBar/index.vue'
+import { setEbookLocalStorage, getEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
+import ProgressBar from 'components/common/progressBar/index.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
@@ -20,8 +26,12 @@ export default defineComponent({
     ProgressBar
   },
   methods: {
-    onProgreeChange(event: MouseEvent) {
-      console.log(event)
+    onProgreeChange(value: number) {
+      console.log(getEbookLocalStorage(`${this.fillName}-info`, 'readingProgress'))
+    },
+    onProgreeInput(value: number) {
+      this.setReadingProgress(value)
+      setEbookLocalStorage(`${this.fillName}-info`, 'readingProgress', value)
     }
   }
 })
@@ -33,7 +43,6 @@ export default defineComponent({
   left: 0;
   bottom: 48rem;
   right: 0;
-  // height: 80rem;
   z-index: 99;
   background-color: rgb(216, 216, 216);
   box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);

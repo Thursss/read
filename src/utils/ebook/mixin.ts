@@ -12,6 +12,8 @@ export const ebookMixin = {
       defaultFontSizeListIndex: state => (state as EbookStore).defaultFontSizeListIndex,
       defaultFontFamilyListIndex: state => (state as EbookStore).defaultFontFamilyListIndex,
       defaultThemeListIndex: state => (state as EbookStore).defaultThemeListIndex,
+      readingProgress: state => (state as EbookStore).readingProgress,
+      progressAbled: state => (state as EbookStore).progressAbled,
     })
   },
   methods: {
@@ -20,7 +22,9 @@ export const ebookMixin = {
       'setMenuShow',
       'setMenuMoreShow',
       'setEbook',
-      'setRendition'
+      'setRendition',
+      'setReadingProgress',
+      'setProgressAbled'
     ]),
   }
 }
