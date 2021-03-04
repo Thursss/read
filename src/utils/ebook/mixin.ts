@@ -34,8 +34,10 @@ export const ebookMixin = {
     refreshReadingProgress() {
       const currentLocation = this.rendition.currentLocation()
       const cfi = currentLocation['start']['cfi']
+      const index = currentLocation['start']['index']
       const progress = this.ebook.locations.percentageFromCfi(cfi)
       this.setReadingProgress(Math.floor(progress * 100))
+      this.setChapter(index)
       setEbookLocalStorage(this.fillName + '-info', 'readingProgress', cfi)
     },
     refreshReadingTime(readTime: number) {
