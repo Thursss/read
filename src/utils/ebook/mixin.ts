@@ -1,5 +1,6 @@
 import { mapState, mapActions } from 'vuex'
 import { EbookStore } from '@/utils/ebook/ebookType'
+import { setEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
 
 export const ebookMixin = {
   computed: {
@@ -13,7 +14,9 @@ export const ebookMixin = {
       defaultFontFamilyListIndex: state => (state as EbookStore).defaultFontFamilyListIndex,
       defaultThemeListIndex: state => (state as EbookStore).defaultThemeListIndex,
       readingProgress: state => (state as EbookStore).readingProgress,
+      readingTime: state => (state as EbookStore).readingTime,
       progressAbled: state => (state as EbookStore).progressAbled,
+      chapter: state => (state as EbookStore).chapter,
     })
   },
   methods: {
@@ -24,7 +27,13 @@ export const ebookMixin = {
       'setEbook',
       'setRendition',
       'setReadingProgress',
-      'setProgressAbled'
+      'setReadingTime',
+      'setProgressAbled',
+      'setChapter'
     ]),
+    refreshReadingTime(readTime: number) {
+      this.setReadingTime(readTime)
+      setEbookLocalStorage(this.fillName + '-info', 'readingTime', readTime)
+    }
   }
 }

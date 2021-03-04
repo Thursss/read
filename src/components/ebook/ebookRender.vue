@@ -1,5 +1,9 @@
 <template>
-  <div id="read" class="read" ref="read"></div>
+  <div
+    id="read"
+    class="read"
+    ref="read"
+  ></div>
 </template>
 
 <script lang='ts'>
@@ -71,7 +75,13 @@ export default defineComponent({
       this.setReadingProgress(readingProgress)
       this.setProgressAbled(false)
       const cfi = this.ebook.locations.cfiFromPercentage(readingProgress / 100)
-      this.rendition.display(cfi)
+      this.rendition.display(cfi).then(() => {
+        this.setChapter()
+      })
+    },
+    setChapter() {
+      const currentLocation = this.rendition.currentLocation()
+      // if (currentLocation && currentLocation['start'] && currentLocation['start']['index'] != this.chapter) this.setChapter(currentLocation['start']['index'])
     },
     addTouchEvent() {
       let startTimeStamp: number

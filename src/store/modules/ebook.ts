@@ -9,12 +9,14 @@ export default {
       isShowMenu: false,
       menuMoreShowNumber: -1, // -1 不显示， 0 显示目录，1 显示进度， 2 显示更多设置
       readingProgress: 0,
+      readingTime: 0,
       ebook: null,
       rendition: null,
       defaultFontSizeListIndex: 2,
       defaultFontFamilyListIndex: 0,
       defaultThemeListIndex: 0,
-      progressAbled: true
+      progressAbled: true,
+      chapter: 0
     }
   },
   mutations: {
@@ -41,9 +43,15 @@ export default {
     SET_READING_PROGRESS(state: EbookStore, readingProgress: number) {
       state.readingProgress = readingProgress
     },
+    SET_READING_TIME(state: EbookStore, readingTime: number) {
+      state.readingTime = readingTime
+    },
     SET_PROGRESS_ABLED(state: EbookStore, progressAbled: boolean) {
       state.progressAbled = progressAbled
     },
+    SET_CHAPTER(state: EbookStore, chapter: number) {
+      state.chapter = chapter
+    }
   },
   actions: {
     setFillName({ commit }, fillName?: string) {
@@ -64,8 +72,14 @@ export default {
     setReadingProgress({ commit }, readingProgress: number) {
       commit('SET_READING_PROGRESS', readingProgress)
     },
+    setReadingTime({ commit }, readingTime: number) {
+      commit('SET_READING_TIME', readingTime)
+    },
     setProgressAbled({ commit }, progressAbled?: number) {
       commit('SET_PROGRESS_ABLED', progressAbled)
+    },
+    setChapter({ commit }, chapter?: number) {
+      commit('SET_CHAPTER', chapter)
     },
   },
 }

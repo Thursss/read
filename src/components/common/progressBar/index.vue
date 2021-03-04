@@ -1,7 +1,7 @@
 <template>
   <div class="progress-bar-wapper">
     <div class="progress-conten">
-      <p class="but prev">上一章</p>
+      <p class="but prev" @click="prevChapter">上一章</p>
       <input
         id="snrPollInterval"
         type="range"
@@ -14,10 +14,7 @@
         @input="onInput"
         @change="onChange"
       />
-      <p class="but next">下一章</p>
-    </div>
-    <div class="title">
-      <p>xxxxxxxxx</p>
+      <p class="but next" @click="nextChapter">下一章</p>
     </div>
   </div>
 </template>
@@ -25,7 +22,6 @@
 <script lang="ts">
 import { defineComponent, InputHTMLAttributes } from 'vue'
 import { throttle} from '@/utils/conmon'
-import { ebookMixin } from '@/utils/ebook/mixin'
 
 export default defineComponent({
   props: {
@@ -44,7 +40,13 @@ export default defineComponent({
     }, 200),
     onChange(event: Event) {
       this.$emit('onProgreeChange', (event.target as InputHTMLAttributes).value)
-    }
+    },
+    prevChapter () {
+      this.$emit('onPrevChapter')
+    },
+    nextChapter () {
+      this.$emit('onNextChapter')
+    },
   }
 })
 </script>
