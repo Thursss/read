@@ -36,14 +36,17 @@ export default defineComponent({
       this.setEbook(book)
       this.setRendition(rendition)
 
+      const cfi = getEbookLocalStorage(this.fillName + '-info', 'readingProgress')
       // 渲染book
-      rendition.display().then(() => {
+      this.display(cfi, () => {
         this.setFontSize()
         this.setFontFamily()
         this.setTheme()
         this.addTouchEvent()
+        this.refreshReadingProgress()
       })
 
+      // book初始发后进行分页
       book.ready.then(() => {
         //通过自带的钩子函数  回调返回locations对象
         let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeIndex')
@@ -51,7 +54,9 @@ export default defineComponent({
         return this.ebook.locations.generate(750 * (innerWidth / 375) * (FONT_SIZE_LIST[fontSizeIndex]['fontSize'] / 16))
       }).then((locations) => {
         // console.log(locations)
+        this.setProgressAbled(false)
         this.setProgress()
+        this.refreshReadingProgress()
       })
     },
     setFontSize() {
@@ -73,7 +78,6 @@ export default defineComponent({
       let readingProgress = getEbookLocalStorage(this.fillName + '-info', 'readingProgress')
       if (readingProgress == null) readingProgress = this.readingProgress
       this.setReadingProgress(readingProgress)
-      this.setProgressAbled(false)
       const cfi = this.ebook.locations.cfiFromPercentage(readingProgress / 100)
       this.rendition.display(cfi).then(() => {
         this.setChapter()

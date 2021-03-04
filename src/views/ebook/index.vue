@@ -28,8 +28,7 @@ export default defineComponent({
       let readTime = getEbookLocalStorage(this.fillName + '-info', 'readingTime')
       if (!readTime) readTime = 0
       this.tick = setInterval(() => {
-        readTime += 1
-        this.refreshReadingTime(readTime)
+        this.refreshReadingTime(readTime++)
       }, 1000)
     }
   },

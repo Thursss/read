@@ -31,9 +31,29 @@ export const ebookMixin = {
       'setProgressAbled',
       'setChapter'
     ]),
+    refreshReadingProgress() {
+      const currentLocation = this.rendition.currentLocation()
+      const cfi = currentLocation['start']['cfi']
+      const progress = this.ebook.locations.percentageFromCfi(cfi)
+      this.setReadingProgress(Math.floor(progress * 100))
+      setEbookLocalStorage(this.fillName + '-info', 'readingProgress', cfi)
+    },
     refreshReadingTime(readTime: number) {
       this.setReadingTime(readTime)
       setEbookLocalStorage(this.fillName + '-info', 'readingTime', readTime)
+    },
+    display(cfi, cb?: Function) {
+      if (cfi) {
+        this.rendition.display(cfi).then(() => {
+          this.refreshReadingProgress()
+          if (cb) cb()
+        })
+      } else {
+        this.rendition.display().then(() => {
+          this.refreshReadingProgress()
+          if (cb) cb()
+        })
+      }
     }
   }
 }
