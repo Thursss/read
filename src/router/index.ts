@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    // redirect: '/book/追风筝的人',
+    redirect: '/book/追风筝的人',
     component: Home
   },
   {

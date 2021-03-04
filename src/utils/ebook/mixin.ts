@@ -10,9 +10,9 @@ export const ebookMixin = {
       menuMoreShowNumber: state => (state as EbookStore).menuMoreShowNumber,
       ebook: state => (state as EbookStore).ebook,
       rendition: state => (state as EbookStore).rendition,
-      defaultFontSizeListIndex: state => (state as EbookStore).defaultFontSizeListIndex,
-      defaultFontFamilyListIndex: state => (state as EbookStore).defaultFontFamilyListIndex,
-      defaultThemeListIndex: state => (state as EbookStore).defaultThemeListIndex,
+      fontSizeListIndex: state => (state as EbookStore).fontSizeListIndex,
+      fontFamilyListIndex: state => (state as EbookStore).fontFamilyListIndex,
+      themeListIndex: state => (state as EbookStore).themeListIndex,
       readingProgress: state => (state as EbookStore).readingProgress,
       readingTime: state => (state as EbookStore).readingTime,
       progressAbled: state => (state as EbookStore).progressAbled,
@@ -26,11 +26,15 @@ export const ebookMixin = {
       'setMenuMoreShow',
       'setEbook',
       'setRendition',
+      'setFontSizeListIndex',
+      'setFontFamilyListIndex',
+      'setThemeListIndex',
       'setReadingProgress',
       'setReadingTime',
       'setProgressAbled',
       'setChapter'
     ]),
+
     refreshReadingProgress() {
       const currentLocation = this.rendition.currentLocation()
       const cfi = currentLocation['start']['cfi']
@@ -43,6 +47,18 @@ export const ebookMixin = {
     refreshReadingTime(readTime: number) {
       this.setReadingTime(readTime)
       setEbookLocalStorage(this.fillName + '-info', 'readingTime', readTime)
+    },
+    refreshFontSize(fontSizeListIndex: number) {
+      this.setFontSizeListIndex(fontSizeListIndex)
+      setEbookLocalStorage(this.fillName + '-info', 'fontSizeListIndex', fontSizeListIndex)
+    },
+    refreshFontFamily(fontFamilyListIndex: number) {
+      this.setFontFamilyListIndex(fontFamilyListIndex)
+      setEbookLocalStorage(this.fillName + '-info', 'fontFamilyListIndex', fontFamilyListIndex)
+    },
+    refreshTheme(themeListIndex: number) {
+      this.setThemeListIndex(themeListIndex)
+      setEbookLocalStorage(this.fillName + '-info', 'themeListIndex', themeListIndex)
     },
     display(cfi, cb?: Function) {
       if (cfi) {

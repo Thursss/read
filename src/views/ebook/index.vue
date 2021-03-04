@@ -27,6 +27,7 @@ export default defineComponent({
     tickTime() {
       let readTime = getEbookLocalStorage(this.fillName + '-info', 'readingTime')
       if (!readTime) readTime = 0
+      this.setReadingTime(readTime)
       this.tick = setInterval(() => {
         this.refreshReadingTime(readTime += 10)
       }, 10000)

@@ -37,12 +37,12 @@ export default defineComponent({
   },
   watch: {
     i() {
-      setEbookLocalStorage(this.fillName + '-info', 'theme', this.i)
+      this.refreshTheme(this.i)
       // this.rendition && this.rendition.themes.fontSize(THEME_LIST[this.i]['fontFamily'])
     }
   },
   mounted() {
-    let themeListIndex = getEbookLocalStorage(this.fillName + '-info', 'theme')
+    let themeListIndex = getEbookLocalStorage(this.fillName + '-info', 'themeListIndex')
     if (themeListIndex == null) themeListIndex = this.defaultThemeListIndex
     this.i = themeListIndex
   }

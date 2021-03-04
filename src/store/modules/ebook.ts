@@ -12,9 +12,9 @@ export default {
       readingTime: 0,
       ebook: null,
       rendition: null,
-      defaultFontSizeListIndex: 2,
-      defaultFontFamilyListIndex: 0,
-      defaultThemeListIndex: 0,
+      fontSizeListIndex: 2,
+      fontFamilyListIndex: 0,
+      themeListIndex: 0,
       progressAbled: true,
       chapter: 0
     }
@@ -39,6 +39,15 @@ export default {
     },
     SET_RENDITION(state: EbookStore, rendition?: any) {
       state.rendition = rendition
+    },
+    SET_FONT_SIZE_LIST_INDEX(state: EbookStore, fontSizeListIndex?: any) {
+      state.fontSizeListIndex = fontSizeListIndex
+    },
+    SET_FONT_FAMILY_LIST_INDEX(state: EbookStore, fontFamilyListIndex?: any) {
+      state.fontFamilyListIndex = fontFamilyListIndex
+    },
+    SET_THEME_LIST_INDEX(state: EbookStore, themeListIndex?: any) {
+      state.themeListIndex = themeListIndex
     },
     SET_READING_PROGRESS(state: EbookStore, readingProgress: number) {
       state.readingProgress = readingProgress
@@ -68,6 +77,15 @@ export default {
     },
     setRendition({ commit }, rendition?: any) {
       commit('SET_RENDITION', rendition)
+    },
+    setFontSizeListIndex({ commit }, fontSizeListIndex?: any) {
+      commit('SET_FONT_SIZE_LIST_INDEX', fontSizeListIndex)
+    },
+    setFontFamilyListIndex({ commit }, fontFamilyListIndex?: any) {
+      commit('SET_FONT_FAMILY_LIST_INDEX', fontFamilyListIndex)
+    },
+    setThemeListIndex({ commit }, rendition?: any) {
+      commit('SET_THEME_LIST_INDEX', rendition)
     },
     setReadingProgress({ commit }, readingProgress: number) {
       commit('SET_READING_PROGRESS', readingProgress)

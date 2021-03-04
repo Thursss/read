@@ -36,13 +36,13 @@ export default defineComponent({
   },
   watch: {
     i() {
-      setEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex', this.i)
+      this.refreshFontFamily(this.i)
       this.rendition && this.rendition.themes.font(FONT_FAMILY_LIST[this.i]['fontFamily'])
     }
   },
   mounted() {
-    let fontFamilyListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
-    if (fontFamilyListIndex == null) fontFamilyListIndex = this.defaultFontFamilyListIndex
+    let fontFamilyListIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyListIndex')
+    if (fontFamilyListIndex == null) fontFamilyListIndex = this.fontFamilyListIndex
     this.i = fontFamilyListIndex
   }
 })

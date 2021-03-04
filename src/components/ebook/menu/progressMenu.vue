@@ -16,7 +16,7 @@
         @onNextChapter='nextChapter'
       ></ProgressBar>
       <div class="title">
-        <p>{{readingProgress + '%'}}</p>
+        <p>{{(chapterName ? chapterName : '') + ' ' + readingProgress + '%'}}</p>
       </div>
     </div>
   </transition>
@@ -33,15 +33,18 @@ export default defineComponent({
     ProgressBar
   },
   computed: {
-    // chapterName() {
-    //   if (this.chapter) {
-    //     const chapterInfo = this.ebook.section(this.chapter)
-    //     if (chapterInfo && chapterInfo.href) {
-    //       return this.ebook.navigation.get(chapterInfo.href)['label']
-    //     }
-    //   }
-    //   return null
-    // }
+    chapterName() {
+      if (this.chapter) {
+        const chapterInfo = this.ebook.section(this.chapter)
+        if (chapterInfo && chapterInfo.href) {
+          const navigationInfo = this.ebook.navigation.get(chapterInfo.href)
+          if(navigationInfo && navigationInfo['label']){
+            return navigationInfo['label']
+          }
+        }
+      }
+      return null
+    }
   },
   methods: {
     onProgreeChange(value) {

@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="read"
-    class="read"
-    ref="read"
-  ></div>
+  <div id="read" class="read" ref="read"></div>
 </template>
 
 <script lang='ts'>
@@ -25,67 +21,46 @@ export default defineComponent({
         method: 'default'
       })
 
-      // 添加字体文件
-      rendition.hooks.content.register(contents => {
-        FONT_FAMILY_LIST.forEach(fontFamily => {
-          if (fontFamily['url']) contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/${fontFamily['url']}`)
-        })
-      })
-
       // 把book相关对象保存到vuex里
       this.setEbook(book)
       this.setRendition(rendition)
-
+      // 添加字体文件
+      this.addFontFamily()
+      // 获取阅读进度
       const cfi = getEbookLocalStorage(this.fillName + '-info', 'readingProgress')
       // 渲染book
       this.display(cfi, () => {
+        this.addTouchEvent()
         this.setFontSize()
         this.setFontFamily()
         this.setTheme()
-        this.addTouchEvent()
-        this.refreshReadingProgress()
       })
 
-      // book初始发后进行分页
+      // book初始化后进行分页
       book.ready.then(() => {
         //通过自带的钩子函数  回调返回locations对象
-        let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeIndex')
-        if (fontSizeIndex == null) fontSizeIndex = this.defaultFontSizeListIndex
+        let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeListIndex')
+        if (fontSizeIndex == null) fontSizeIndex = this.fontSizeListIndex
         return this.ebook.locations.generate(750 * (innerWidth / 375) * (FONT_SIZE_LIST[fontSizeIndex]['fontSize'] / 16))
-      }).then((locations) => {
-        // console.log(locations)
+      }).then(() => {
         this.setProgressAbled(false)
-        this.setProgress()
         this.refreshReadingProgress()
       })
     },
     setFontSize() {
-      let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeIndex')
-      if (fontSizeIndex == null) fontSizeIndex = this.defaultFontSizeListIndex
+      let fontSizeIndex = getEbookLocalStorage(this.fillName + '-info', 'fontSizeListIndex')
+      if (fontSizeIndex == null) fontSizeIndex = this.fontSizeListIndex
       this.rendition.themes.fontSize(FONT_SIZE_LIST[fontSizeIndex]['fontSize'])
     },
     setFontFamily() {
-      let fontFamilyIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyIndex')
-      if (fontFamilyIndex == null) fontFamilyIndex = this.defaultFontFamilyListIndex
+      let fontFamilyIndex = getEbookLocalStorage(this.fillName + '-info', 'fontFamilyListIndex')
+      if (fontFamilyIndex == null) fontFamilyIndex = this.fontFamilyListIndex
       this.rendition.themes.font(FONT_FAMILY_LIST[fontFamilyIndex]['fontFamily'])
     },
     setTheme() {
-      let themeListIndex = getEbookLocalStorage(this.fillName + '-info', 'theme')
-      if (themeListIndex == null) themeListIndex = this.defaultThemeListIndex
+      let themeListIndex = getEbookLocalStorage(this.fillName + '-info', 'themeListIndex')
+      if (themeListIndex == null) themeListIndex = this.themeListIndex
       // this.rendition.themes.font(FONT_FAMILY_LIST[themeListIndex]['fontFamily'])
-    },
-    setProgress() {
-      let readingProgress = getEbookLocalStorage(this.fillName + '-info', 'readingProgress')
-      if (readingProgress == null) readingProgress = this.readingProgress
-      this.setReadingProgress(readingProgress)
-      const cfi = this.ebook.locations.cfiFromPercentage(readingProgress / 100)
-      this.rendition.display(cfi).then(() => {
-        this.setChapter()
-      })
-    },
-    setChapter() {
-      const currentLocation = this.rendition.currentLocation()
-      // if (currentLocation && currentLocation['start'] && currentLocation['start']['index'] != this.chapter) this.setChapter(currentLocation['start']['index'])
     },
     addTouchEvent() {
       let startTimeStamp: number
@@ -107,16 +82,28 @@ export default defineComponent({
 
         if (TimeStamp > 50 && MoveX < -40) {
           if (this.isShowMenu) this.setMenuShow()
-          this.rendition.next()
+          this.rendition.next().then(() => {
+            this.refreshReadingProgress()
+          })
         } else if (TimeStamp > 50 && MoveX > 40) {
           if (this.isShowMenu) this.setMenuShow()
-          this.rendition.prev()
+          this.rendition.prev().then(() => {
+            this.refreshReadingProgress()
+          })
         } else {
           this.setMenuShow()
         }
         // 阻止冒泡和默认事件
         event.stopPropagation()
         // event.preventDefault()
+      })
+    },
+    addFontFamily() {
+      // 添加字体文件
+      this.rendition.hooks.content.register(contents => {
+        FONT_FAMILY_LIST.forEach(fontFamily => {
+          if (fontFamily['url']) contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/${fontFamily['url']}`)
+        })
       })
     }
   },
