@@ -29,8 +29,8 @@ export default defineComponent({
       if (!readTime) readTime = 0
       this.setReadingTime(readTime)
       this.tick = setInterval(() => {
-        this.refreshReadingTime(readTime += 10)
-      }, 10000)
+        this.refreshReadingTime(readTime += 60)
+      }, 60000)
     }
   },
   mounted() {

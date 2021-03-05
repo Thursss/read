@@ -14,7 +14,10 @@
         :style="{'box-shadow': menuMoreShowNumber == -1 ? '1rem -4rem 8rem rgba(0, 0, 0, 0.2)' : 'none'}"
       >
         <ul class="menu-list">
-          <li class="menu-item">
+          <li
+            class="menu-item"
+            @click="showMoreMeun(0)"
+          >
             <span class="icon-menu"></span>
             <p class="text">目录</p>
           </li>
@@ -33,9 +36,8 @@
         </ul>
       </div>
       <MoreMuen></MoreMuen>
-      <ProgressMenu
-
-      ></ProgressMenu>
+      <ProgressMenu></ProgressMenu>
+      <DirectoryMenu></DirectoryMenu>
     </div>
   </transition>
 </template>
@@ -45,12 +47,14 @@ import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
 import MoreMuen from 'components/ebook/menu/moreMenu.vue'
 import ProgressMenu from 'components/ebook/menu/progressMenu.vue'
+import DirectoryMenu from 'components/ebook/directoryMenu.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
     MoreMuen,
-    ProgressMenu
+    ProgressMenu,
+    DirectoryMenu
   },
   methods: {
     showMoreMeun(menuMoreShowNumber?: number) {

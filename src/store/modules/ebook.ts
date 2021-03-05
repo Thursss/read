@@ -27,11 +27,11 @@ export default {
       state.isShowMenu = !state.isShowMenu
       if(state.isShowMenu == false) state.menuMoreShowNumber = -1
     },
-    SET_MENU_MORE_SHOW(state: EbookStore, menuMoreShowNumber?: number) {
+    SET_MENU_MORE_SHOW(state: EbookStore, menuMoreShowNumber: number) {
       if (state.menuMoreShowNumber === menuMoreShowNumber) {
         state.menuMoreShowNumber = -1
       } else {
-        state.menuMoreShowNumber = menuMoreShowNumber || -1
+        state.menuMoreShowNumber = menuMoreShowNumber
       }
     },
     SET_EBOOK(state: EbookStore, ebook?: any) {
@@ -69,7 +69,7 @@ export default {
     setMenuShow({ commit }, menuShow?: boolean) {
       commit('SET_MENU_SHOW', menuShow)
     },
-    setMenuMoreShow({ commit }, menuMoreShowNumber?: number) {
+    setMenuMoreShow({ commit }, menuMoreShowNumber: number) {
       commit('SET_MENU_MORE_SHOW', menuMoreShowNumber)
     },
     setEbook({ commit }, ebook?: any) {

@@ -34,7 +34,10 @@ export const ebookMixin = {
       'setProgressAbled',
       'setChapter'
     ]),
-
+    hiedMenu() {
+      this.setMenuShow(false)
+      this.setMenuMoreShow(-1)
+    },
     refreshReadingProgress() {
       const currentLocation = this.rendition.currentLocation()
       const cfi = currentLocation['start']['cfi']
