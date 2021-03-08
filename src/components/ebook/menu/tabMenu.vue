@@ -18,17 +18,20 @@
     </div>
     <div class="info-box">
       <div class="book-img"><img
-          src="https://book.youbaobao.xyz/epub2/2018_Book_MethodologicalInvestigationsIn/OEBPS/images/978-3-319-72408-9_CoverFigure.jpg"
+          :src="cover"
           alt=""
         ></div>
       <div class="book-desc">
-        <p class="book-name">xxxx</p>
-        <p class="book-author">xxxx</p>
+        <p class="book-name">{{metadata?.title}}</p>
+        <p class="book-author">{{metadata?.creator}}</p>
       </div>
       <div class="read-info">
         <p class="read-progress">{{readingProgress}}%已读</p>
         <p class="read-time">已读{{Math.ceil(readingTime / 60)}}分钟</p>
       </div>
+    </div>
+    <div class="toc-wapper">
+      {{toc}}
     </div>
   </div>
 </template>
@@ -48,14 +51,20 @@ export default defineComponent({
     tiggtFocus(type: boolean) {
       this.inputFocus = type
     }
+  },
+  mounted() {
+    console.log(this.toc)
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .tab-wapper {
+  position: relative;
   padding-bottom: 10rem;
-  border-bottom: 1px solid #bbb;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
   .search-wapper {
     display: flex;
     align-items: center;
@@ -97,8 +106,10 @@ export default defineComponent({
   .info-box {
     display: flex;
     align-items: center;
-    padding: 0 10rem;
-    height: 60rem;
+    padding: 0 10rem 15rem 10rem;
+    height: 76rem;
+    border-bottom: 1px solid #bbb;
+    box-sizing: border-box;
     .book-img {
       padding-right: 10rem;
       height: 100%;
@@ -114,13 +125,19 @@ export default defineComponent({
       justify-content: center;
       height: 100%;
       .book-name {
+        max-height: 40rem;
         line-height: 20rem;
         font-size: 16rem;
         color: #222;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .book-author {
+        max-height: 20rem;
         font-size: 14rem;
         color: #666;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .read-info {
@@ -128,12 +145,23 @@ export default defineComponent({
       flex-direction: column;
       justify-content: center;
       height: 100%;
-      .read-progress,.read-time {
+      .read-progress,
+      .read-time {
         line-height: 18rem;
         font-size: 14rem;
         color: #222;
       }
     }
+  }
+  .toc-wapper {
+    position: absolute;
+    top: 136em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden auto;
+    padding: 10rem;
+    box-sizing: border-box;
   }
 }
 </style>

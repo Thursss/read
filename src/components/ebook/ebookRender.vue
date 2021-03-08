@@ -1,5 +1,9 @@
 <template>
-  <div id="read" class="read" ref="read"></div>
+  <div
+    id="read"
+    class="read"
+    ref="read"
+  ></div>
 </template>
 
 <script lang='ts'>
@@ -34,6 +38,7 @@ export default defineComponent({
         this.setFontSize()
         this.setFontFamily()
         this.setTheme()
+        this.initInfo()
       })
 
       // book初始化后进行分页
@@ -45,6 +50,65 @@ export default defineComponent({
       }).then(() => {
         this.setProgressAbled(false)
         this.refreshReadingProgress()
+      })
+    },
+    initInfo() {
+      // 获取封面
+      this?.ebook.loaded.cover.then(cover => {
+        this?.ebook?.archive.createUrl(cover).then(url => {
+          this.setCover(url)
+        })
+      })
+      // 获取信息
+      this?.ebook.loaded.metadata.then(metadata => {
+        this.setMetadata(metadata)
+      })
+      // 获取目录
+      this?.ebook.loaded.navigation.then(navigation => {
+        // this.setToc(navigation?.toc)
+        console.log(navigation?.toc)
+
+        const toc = {
+          id: 1,
+          label: '1',
+          subitems: [
+            {
+              id: 2,
+              label: '2',
+              subitems: [
+                {
+                  id: 3,
+                  label: '3',
+                  subitems: [
+                    {
+                      id: 4,
+                      label: '4',
+                      subitems: [
+                        {
+                          id: 5,
+                          label: '5',
+                          subitems: []
+                        },
+                      ]
+                    },
+                  ]
+                },
+              ]
+            },
+            {
+              id: 6,
+              label: '6',
+              subitems: []
+            },
+            {
+              id: 7,
+              label: '7',
+              subitems: []
+            }
+          ]
+        }
+
+        this.setToc(toc)
       })
     },
     setFontSize() {

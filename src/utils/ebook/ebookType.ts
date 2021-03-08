@@ -10,7 +10,10 @@ export interface EbookStore {
   fontFamilyListIndex: number,
   themeListIndex: number,
   progressAbled: boolean | null,
-  chapter: number
+  chapter: number,
+  toc: any,
+  cover: string,
+  metadata: object
 }
 
 export type EbookLocalStorageType = 'fontSizeListIndex' | 'fontFamilyListIndex' | 'themeListIndex' | 'readingProgress' | 'readingTime'

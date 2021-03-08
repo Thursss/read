@@ -16,12 +16,15 @@ export default {
       fontFamilyListIndex: 0,
       themeListIndex: 0,
       progressAbled: true,
-      chapter: 0
+      chapter: 0,
+      toc: null,
+      cover: '',
+      metadata: {}
     }
   },
   mutations: {
     SET_FILL_NAME(state: EbookStore, fillName?: string) {
-      state.fillName = fillName || ''
+      state.fillName = fillName ?? ''
     },
     SET_MENU_SHOW(state: EbookStore, menuShow?: boolean) {
       state.isShowMenu = !state.isShowMenu
@@ -60,7 +63,16 @@ export default {
     },
     SET_CHAPTER(state: EbookStore, chapter: number) {
       state.chapter = chapter
-    }
+    },
+    SET_TOC(state: EbookStore, toc: any) {
+      state.toc = toc
+    },
+    SET_COVER(state: EbookStore, cover: string) {
+      state.cover = cover
+    },
+    SET_METADATA(state: EbookStore, metadata: object) {
+      state.metadata = metadata
+    },
   },
   actions: {
     setFillName({ commit }, fillName?: string) {
@@ -98,6 +110,15 @@ export default {
     },
     setChapter({ commit }, chapter?: number) {
       commit('SET_CHAPTER', chapter)
+    },
+    setToc({ commit }, toc?: any) {
+      commit('SET_TOC', toc)
+    },
+    setCover({ commit }, cover: string) {
+      commit('SET_COVER', cover)
+    },
+    setMetadata({ commit }, metadata: object) {
+      commit('SET_METADATA', metadata)
     },
   },
 }

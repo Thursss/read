@@ -17,6 +17,9 @@ export const ebookMixin = {
       readingTime: state => (state as EbookStore).readingTime,
       progressAbled: state => (state as EbookStore).progressAbled,
       chapter: state => (state as EbookStore).chapter,
+      toc: state => (state as EbookStore).toc,
+      cover: state => (state as EbookStore).cover,
+      metadata: state => (state as EbookStore).metadata,
     })
   },
   methods: {
@@ -32,7 +35,10 @@ export const ebookMixin = {
       'setReadingProgress',
       'setReadingTime',
       'setProgressAbled',
-      'setChapter'
+      'setChapter',
+      'setToc',
+      'setCover',
+      'setMetadata'
     ]),
     hiedMenu() {
       this.setMenuShow(false)
