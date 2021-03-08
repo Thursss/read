@@ -1,4 +1,4 @@
-function debounce(fn: Function, interval = 300) {
+export function debounce(fn: Function, interval = 300) {
   let timer: any = null
 
   return function (...arg) {
@@ -9,7 +9,7 @@ function debounce(fn: Function, interval = 300) {
   }
 }
 
-function throttle(fn: Function, interval = 300) {
+export function throttle(fn: Function, interval = 300) {
   let timer: any = null
   return function (...arg) {
     if (timer == null) {
@@ -21,4 +21,6 @@ function throttle(fn: Function, interval = 300) {
   }
 }
 
-export { debounce, throttle }
+export function flatten(arr: any[], key = 'key') {
+  return [].concat(...arr.map((item) => (item[key] && Object.prototype.toString.call(item[key]) === '[object Array]') ? [].concat(item, ...flatten(item[key], key)) : item))
+}

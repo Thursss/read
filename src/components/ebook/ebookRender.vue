@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="read"
-    class="read"
-    ref="read"
-  ></div>
+  <div id="read" class="read" ref="read"></div>
 </template>
 
 <script lang='ts'>
@@ -11,6 +7,7 @@ import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
 import { getEbookLocalStorage } from '@/utils/ebook/ebookLocalStorage'
 import { FONT_SIZE_LIST, FONT_FAMILY_LIST } from '@/utils/ebook/book'
+import { flatten } from '@/utils/utils'
 import Epub from 'epubjs'
 // global.epub = Epub
 
@@ -66,9 +63,8 @@ export default defineComponent({
       // 获取目录
       this?.ebook.loaded.navigation.then(navigation => {
         // this.setToc(navigation?.toc)
-        console.log(navigation?.toc)
 
-        const toc = {
+        const toc: any[] = [{
           id: 1,
           label: '1',
           subitems: [
@@ -106,7 +102,12 @@ export default defineComponent({
               subitems: []
             }
           ]
-        }
+        }, {
+          id: 8,
+          label: '8',
+          subitems: []
+        }]
+        console.log(flatten(navigation?.toc, 'subitems'))
 
         this.setToc(toc)
       })

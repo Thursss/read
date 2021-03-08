@@ -1,29 +1,15 @@
 <template>
-  <div
-    class="directory-wapper"
-    v-show="isShowMenu && menuMoreShowNumber === 0"
-  >
+  <div class="directory-wapper" v-show="isShowMenu && menuMoreShowNumber === 0">
     <div class="content">
       <div class="content-wapper">
         <component :is="currentTabComponent"></component>
       </div>
       <div class="set-tab-wapper">
-        <div
-          class="tab"
-          :class="{on: on === 0}"
-          @click="tabChang(0)"
-        >目录</div>
-        <div
-          class="tab"
-          :class="{on: on === 1}"
-          @click="tabChang(1)"
-        >书签</div>
+        <div class="tab" :class="{on: on === 0}" @click="tabChang(0)">目录</div>
+        <div class="tab" :class="{on: on === 1}" @click="tabChang(1)">书签</div>
       </div>
     </div>
-    <div
-      class="content-bg"
-      @click="hiedMenu"
-    ></div>
+    <div class="content-bg" @click="hiedMenu"></div>
   </div>
 </template>
 
@@ -98,7 +84,6 @@ export default defineComponent({
       text-align: center;
       color: #666;
       border-top: 1px solid #aaa;
-
       .tab {
         flex: 1;
         &.on {

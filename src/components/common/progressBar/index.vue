@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, InputHTMLAttributes } from 'vue'
-import { throttle} from '@/utils/conmon'
+import { throttle } from '@/utils/utils'
 
 export default defineComponent({
   props: {
