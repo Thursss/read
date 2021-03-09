@@ -30,7 +30,10 @@
         <p class="read-time">已读{{Math.ceil(readingTime / 60)}}分钟</p>
       </div>
     </div>
-    <div class="toc-wapper">
+    <div
+      class="toc-wapper"
+      v-if="!inputFocus"
+    >
       <div
         class="toc-item"
         v-for="(item, index) in toc"
@@ -47,6 +50,10 @@
         </div>
       </div>
     </div>
+    <div
+      class="seach-wapper"
+      v-else
+    ></div>
   </div>
 </template>
 
@@ -184,7 +191,7 @@ export default defineComponent({
       display: flex;
       line-height: 40rem;
       font-size: 16rem;
-      &.on{
+      &.on {
         color: rgb(242, 255, 65);
       }
       .text {
