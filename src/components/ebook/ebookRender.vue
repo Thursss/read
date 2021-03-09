@@ -1,5 +1,9 @@
 <template>
-  <div id="read" class="read" ref="read"></div>
+  <div
+    id="read"
+    class="read"
+    ref="read"
+  ></div>
 </template>
 
 <script lang='ts'>
@@ -62,27 +66,30 @@ export default defineComponent({
       })
       // 获取目录
       this?.ebook.loaded.navigation.then(navigation => {
-        // this.setToc(navigation?.toc)
-
         const toc: any[] = [{
           id: 1,
-          label: '1',
+          label: '水水水水',
+          parent: undefined,
           subitems: [
             {
               id: 2,
-              label: '2',
+              label: '啊沙发沙发',
+              parent: 1,
               subitems: [
                 {
                   id: 3,
-                  label: '3',
+                  label: '案说法是广东省个别地方',
+                  parent: 2,
                   subitems: [
                     {
                       id: 4,
                       label: '4',
+                      parent: 3,
                       subitems: [
                         {
                           id: 5,
                           label: '5',
+                          parent: 4,
                           subitems: []
                         },
                       ]
@@ -93,23 +100,29 @@ export default defineComponent({
             },
             {
               id: 6,
-              label: '6',
+              label: '6水水水',
+              parent: 1,
               subitems: []
             },
             {
               id: 7,
               label: '7',
+              parent: 1,
               subitems: []
             }
           ]
         }, {
           id: 8,
-          label: '8',
+          label: '改革的难度8',
+          parent: undefined,
           subitems: []
         }]
-        console.log(flatten(navigation?.toc, 'subitems'))
 
-        this.setToc(toc)
+        const flatToc: any[] = flatten(navigation?.toc, 'subitems')
+        flatToc.forEach((item) => {
+          item.parent ? item.leave = (flatToc.filter(parent => parent.id === item.parent) as any)[0]?.leave + 1 : item.leave = 0
+        })
+        this.setToc(flatToc)
       })
     },
     setFontSize() {
@@ -130,11 +143,13 @@ export default defineComponent({
     addTouchEvent() {
       let startTimeStamp: number
       let startMoveX: number
+      let startMoveY: number
       // 触摸开始
       this.rendition.on('touchstart', (event: TouchEvent) => {
         if (event.changedTouches.length > 1) return
         startTimeStamp = event.timeStamp
         startMoveX = (event.changedTouches as TouchList)[0].clientX
+        startMoveY = (event.changedTouches as TouchList)[0].clientY
         // 阻止冒泡和默认事件
         event.stopPropagation()
         // event.preventDefault()
@@ -144,19 +159,24 @@ export default defineComponent({
         if (event.changedTouches.length > 1) return
         const TimeStamp = event.timeStamp - startTimeStamp
         const MoveX = (event.changedTouches as TouchList)[0].clientX - startMoveX
+        const MoveY = (event.changedTouches as TouchList)[0].clientY - startMoveY
 
-        if (TimeStamp > 50 && MoveX < -40) {
-          if (this.isShowMenu) this.setMenuShow()
-          this.rendition.next().then(() => {
-            this.refreshReadingProgress()
-          })
-        } else if (TimeStamp > 50 && MoveX > 40) {
-          if (this.isShowMenu) this.setMenuShow()
-          this.rendition.prev().then(() => {
-            this.refreshReadingProgress()
-          })
-        } else {
-          this.setMenuShow()
+        if (TimeStamp > 50) {
+          if (MoveY >= 80) {
+            console.log(MoveY)
+          } else if (MoveX < -40) {
+            if (this.isShowMenu) this.setMenuShow()
+            this.rendition.next().then(() => {
+              this.refreshReadingProgress()
+            })
+          } else if (MoveX > 40) {
+            if (this.isShowMenu) this.setMenuShow()
+            this.rendition.prev().then(() => {
+              this.refreshReadingProgress()
+            })
+          } else {
+            this.setMenuShow()
+          }
         }
         // 阻止冒泡和默认事件
         event.stopPropagation()

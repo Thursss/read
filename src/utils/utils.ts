@@ -21,6 +21,6 @@ export function throttle(fn: Function, interval = 300) {
   }
 }
 
-export function flatten(arr: any[], key = 'key') {
+export function flatten(arr: any[], key = 'key'): any[] {
   return [].concat(...arr.map((item) => (item[key] && Object.prototype.toString.call(item[key]) === '[object Array]') ? [].concat(item, ...flatten(item[key], key)) : item))
 }

@@ -31,7 +31,21 @@
       </div>
     </div>
     <div class="toc-wapper">
-      {{toc}}
+      <div
+        class="toc-item"
+        v-for="(item, index) in toc"
+        :key="index + '-toc'"
+        :style="{'padding-left': item.leave * 15 + 'rem'}"
+        :class="{on: chapter === (index + 2)}"
+        @click="displayNav(item.href)"
+      >
+        <div class="text">
+          {{item.label}}
+        </div>
+        <div class="inde">
+          {{index + 1}}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +64,10 @@ export default defineComponent({
   methods: {
     tiggtFocus(type: boolean) {
       this.inputFocus = type
+    },
+    displayNav(cfi) {
+      this.display(cfi)
+      this.hiedMenu()
     }
   },
   mounted() {
@@ -162,6 +180,20 @@ export default defineComponent({
     overflow: hidden auto;
     padding: 10rem;
     box-sizing: border-box;
+    .toc-item {
+      display: flex;
+      line-height: 40rem;
+      font-size: 16rem;
+      &.on{
+        color: rgb(242, 255, 65);
+      }
+      .text {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 }
 </style>
