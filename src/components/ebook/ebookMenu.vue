@@ -11,7 +11,7 @@
     >
       <div
         class="menu-wapper"
-        :style="{'box-shadow': menuMoreShowNumber == -1 ? '1rem -4rem 8rem rgba(0, 0, 0, 0.2)' : 'none'}"
+        :style="{'box-shadow': menuMoreShowNumber == -1 ? '1px -4px 8px rgba(0, 0, 0, 0.2)' : 'none'}"
       >
         <ul class="menu-list">
           <li
@@ -73,9 +73,9 @@ export default defineComponent({
     right: 0;
     z-index: 100;
     background-color: #ccc;
-    box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
+    box-shadow: 1px -4px 8px rgba(0, 0, 0, 0.2);
     z-index: 101;
-    padding: 10rem 0;
+    padding: 10px 0;
     .menu-list {
       display: flex;
       height: 100%;
@@ -86,10 +86,10 @@ export default defineComponent({
         height: 100%;
         align-items: center;
         justify-content: center;
-        font-size: 14rem;
+        font-size: 14px;
         .text {
-          font-size: 8rem;
-          margin-top: 5rem;
+          font-size: 8px;
+          margin-top: 5px;
         }
       }
     }

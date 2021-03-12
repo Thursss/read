@@ -52,20 +52,21 @@ export default defineComponent({
 .font-family-wapper {
   display: flex;
   width: 100%;
-  height: 27rem;
-  padding: 0 10rem;
+  height: 27px;
+  padding: 0 10px;
   overflow-x: auto;
   box-sizing: border-box;
   .font-family-item {
     flex-shrink: 0;
-    margin-right: 10rem;
-    height: 15rem;
-    line-height: 15rem;
+    margin-right: 10px;
+    height: 15px;
+    line-height: 15px;
     border: 1px solid rgba(34, 34, 34, 0.2);
-    padding: 5rem 10rem;
-    border-radius: 2rem;
+    padding: 5px 10px;
+    border-radius: 2px;
     border-color: #666;
     color: #666;
+    font-size: 16px;
     &.on {
       border-color: #000;
       color: #000;

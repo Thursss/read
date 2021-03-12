@@ -86,36 +86,36 @@ export default defineComponent({
 <style lang="scss" scoped>
 .tab-wapper {
   position: relative;
-  padding-bottom: 10rem;
+  padding-bottom: 10px;
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
   .search-wapper {
     display: flex;
     align-items: center;
-    padding: 0 10rem;
+    padding: 0 10px;
     width: 100%;
-    height: 60rem;
+    height: 60px;
     box-sizing: border-box;
     .search-box {
       display: flex;
       align-items: center;
-      padding: 0 5rem;
+      padding: 0 5px;
       width: 80%;
-      height: 35rem;
-      margin-right: 4rem;
+      height: 35px;
+      margin-right: 4px;
       border: 1px solid #999;
-      border-radius: 1rem;
+      border-radius: 1px;
       background-color: #ccc;
       .icon {
-        margin-right: 4rem;
-        font-size: 18rem;
+        margin-right: 4px;
+        font-size: 18px;
         color: #666;
       }
       .input {
         flex: 1;
         border: none;
-        font-size: 14rem;
+        font-size: 14px;
         background-color: transparent;
         height: 100%;
         &:focus {
@@ -124,23 +124,23 @@ export default defineComponent({
       }
     }
     .cancel-but {
-      margin: 0 5rem;
+      margin: 0 5px;
       color: #346cb9;
     }
   }
   .info-box {
     display: flex;
     align-items: center;
-    padding: 0 10rem 15rem 10rem;
-    height: 76rem;
+    padding: 0 10px 15px 10px;
+    height: 76px;
     border-bottom: 1px solid #bbb;
     box-sizing: border-box;
     .book-img {
-      padding-right: 10rem;
+      padding-right: 10px;
       height: 100%;
       img {
-        width: 45rem;
-        height: 60rem;
+        width: 45px;
+        height: 60px;
       }
     }
     .book-desc {
@@ -150,16 +150,16 @@ export default defineComponent({
       justify-content: center;
       height: 100%;
       .book-name {
-        max-height: 40rem;
-        line-height: 20rem;
-        font-size: 16rem;
+        max-height: 40px;
+        line-height: 20px;
+        font-size: 16px;
         color: #222;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       .book-author {
-        max-height: 20rem;
-        font-size: 14rem;
+        max-height: 20px;
+        font-size: 14px;
         color: #666;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -172,8 +172,8 @@ export default defineComponent({
       height: 100%;
       .read-progress,
       .read-time {
-        line-height: 18rem;
-        font-size: 14rem;
+        line-height: 18px;
+        font-size: 14px;
         color: #222;
       }
     }
@@ -185,12 +185,12 @@ export default defineComponent({
     right: 0;
     bottom: 0;
     overflow: hidden auto;
-    padding: 10rem;
+    padding: 10px;
     box-sizing: border-box;
     .toc-item {
       display: flex;
-      line-height: 40rem;
-      font-size: 16rem;
+      line-height: 40px;
+      font-size: 16px;
       &.on {
         color: rgb(242, 255, 65);
       }

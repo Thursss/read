@@ -12,6 +12,6 @@ export default defineComponent({
 <style lang='scss' scoped>
   .font{
     font-family: '凌云行书';
-    font-size: 30rem;
+    font-size: 30px;
   }
 </style>

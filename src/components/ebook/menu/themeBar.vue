@@ -53,19 +53,20 @@ export default defineComponent({
 .theme-wapper {
   display: flex;
   width: 100%;
-  height: 43rem;
-  padding: 0 10rem;
+  height: 43px;
+  padding: 0 10px;
   overflow: auto hidden;
   box-sizing: border-box;
   .theme-item {
     text-align: center;
     flex-shrink: 0;
-    margin-right: 10rem;
-    line-height: 15rem;
-    padding: 0 5rem;
-    border-radius: 2rem;
+    margin-right: 10px;
+    line-height: 15px;
+    padding: 0 5px;
+    border-radius: 2px;
     border-color: #666;
     color: #666;
+    font-size: 14px;
     &.on {
       border-color: #000;
       color: #000;
@@ -73,9 +74,9 @@ export default defineComponent({
     .ui {
       display: block;
       border-radius: 50%;
-      width: 20rem;
-      height: 20rem;
-      margin-bottom: 5rem;
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
       border: 1px solid #111;
       border-color: #222;
     }

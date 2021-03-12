@@ -5,8 +5,12 @@
         <component :is="currentTabComponent"></component>
       </div>
       <div class="set-tab-wapper">
-        <div class="tab" :class="{on: on === 0}" @click="tabChang(0)">目录</div>
-        <div class="tab" :class="{on: on === 1}" @click="tabChang(1)">书签</div>
+        <div class="tab" :class="{on: on === 0}" @click="tabChang(0)">
+          <p>目录</p>
+        </div>
+        <div class="tab" :class="{on: on === 1}" @click="tabChang(1)">
+          <p>书签</p>
+        </div>
       </div>
     </div>
     <div class="content-bg" @click="hiedMenu"></div>
@@ -71,7 +75,7 @@ export default defineComponent({
       left: 0;
       right: 0;
       top: 0;
-      bottom: 50rem;
+      bottom: 50px;
     }
     .set-tab-wapper {
       position: absolute;
@@ -79,13 +83,17 @@ export default defineComponent({
       right: 0;
       bottom: 0;
       display: flex;
-      height: 50rem;
-      line-height: 50rem;
       text-align: center;
       color: #666;
       border-top: 1px solid #aaa;
       .tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex: 1;
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
         &.on {
           color: #346cb9;
         }

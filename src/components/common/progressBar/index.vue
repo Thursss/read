@@ -58,21 +58,21 @@ export default defineComponent({
     display: flex;
     align-items: center;
     .but {
-      font-size: 12rem;
+      font-size: 12px;
     }
     #snrPollInterval {
       position: relative;
       flex: 1;
-      margin: 0 8rem;
+      margin: 0 8px;
       width: 100%;
-      height: 5rem;
-      border-radius: 6rem;
+      height: 5px;
+      border-radius: 6px;
       -webkit-appearance: none;
       background: -webkit-linear-gradient(#5d6268, #5d6268) no-repeat, #b4b5b7;
       background-size: 30% 100%;
       &::-webkit-slider-thumb {
-        width: 10rem;
-        height: 10rem;
+        width: 10px;
+        height: 10px;
         background-color: #fff;
         border-radius: 50%;
         cursor: default;
@@ -81,9 +81,9 @@ export default defineComponent({
     }
   }
   .title {
-    margin-top: 5rem;
+    margin-top: 5px;
     text-align: center;
-    font-size: 14rem;
+    font-size: 14px;
   }
 }
 </style>

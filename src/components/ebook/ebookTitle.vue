@@ -38,19 +38,19 @@ export default defineComponent({
   right: 0;
   z-index: 100;
   display: flex;
-  height: 48rem;
+  height: 48px;
   background-color: #ccc;
-  box-shadow: 1rem 4rem 8rem rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.2);
   .left,
   .right {
     display: flex;
     align-items: center;
-    font-size: 18rem;
+    font-size: 18px;
   }
   .left {
-    width: 40rem;
+    width: 40px;
     justify-content: center;
-    font-size: 16rem;
+    font-size: 16px;
   }
   .right {
     display: flex;
@@ -60,7 +60,7 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 40rem;
+      width: 40px;
       height: 100%;
     }
   }

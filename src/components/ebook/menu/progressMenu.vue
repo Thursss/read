@@ -80,18 +80,20 @@ export default defineComponent({
 .menu-content {
   position: absolute;
   left: 0;
-  bottom: 48rem;
+  bottom: 48px;
   right: 0;
   z-index: 99;
   text-align: center;
   background-color: rgb(216, 216, 216);
-  box-shadow: 1rem -4rem 8rem rgba(0, 0, 0, 0.2);
-  padding: 15rem 10rem;
+  box-shadow: 1px -4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px 10px;
   .readingTime {
-    margin-bottom: 10rem;
+    margin-bottom: 10px;
+    font-size: 14px;
   }
   .title {
-    margin-top: 10rem;
+    margin-top: 10px;
+    font-size: 16px;
   }
 }
 </style>

@@ -83,27 +83,27 @@ export default defineComponent({
     .line {
       position: relative;
       flex: 1;
-      height: 1rem;
+      height: 1px;
       background-color: #999;
       .line-dot {
         position: absolute;
-        top: -2rem;
+        top: -2px;
         left: 50%;
-        transform: translateX(-0.5rem);
-        width: 1rem;
-        height: 5rem;
+        transform: translateX(-0.5px);
+        width: 1px;
+        height: 5px;
         background-color: #666;
       }
       .border-dot {
         position: absolute;
-        top: -7rem;
+        top: -7px;
         left: 50%;
-        transform: translateX(-7rem);
-        width: 14rem;
-        height: 14rem;
+        transform: translateX(-7px);
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         box-sizing: border-box;
-        border: #111 solid 1rem;
+        border: #111 solid 1px;
         .dot {
           position: absolute;
           left: 0;
@@ -111,8 +111,8 @@ export default defineComponent({
           top: 0;
           bottom: 0;
           margin: auto;
-          width: 5rem;
-          height: 5rem;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           background-color: #111;
         }
@@ -120,12 +120,12 @@ export default defineComponent({
     }
   }
   .icon-wapper {
-    padding: 0 10rem;
+    padding: 0 10px;
     &.less {
-      font-size: 14rem;
+      font-size: 14px;
     }
     &.add {
-      font-size: 18rem;
+      font-size: 18px;
     }
   }
 }

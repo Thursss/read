@@ -1,9 +1,3 @@
 @import './minix.scss';
 @import './reset.scss';
 @import './transition.scss';
-
-$fontsize: 37.5;
-
-@function px2rem($px) {
-    @return ($px / $fontsize) + rem;
-}

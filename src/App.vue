@@ -8,8 +8,8 @@ export default defineComponent({
   methods: {
     setRem() {
       const html: HTMLHtmlElement | null = document.querySelector('html')
-      let fontSize = window.innerWidth / 375
-      fontSize = fontSize > 1.75 ? 1.75 : fontSize
+      let fontSize = window.innerWidth / 10
+      fontSize = fontSize > 50 ? 50 : fontSize
       html && (html.style.fontSize = fontSize + 'px')
     },
     onError(error: ErrorEvent) {
