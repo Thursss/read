@@ -38,14 +38,14 @@
         class="toc-item"
         v-for="(item, index) in toc"
         :key="index + '-toc'"
-        :style="{'padding-left': item.leave * 15 + 'rem'}"
+        :style="{'padding-left': item.leave * 15 + 'px'}"
         :class="{on: chapter === (index + 2)}"
         @click="displayNav(item.href)"
       >
         <div class="text">
           {{item.label}}
         </div>
-        <div class="inde">
+        <div class="index">
           {{index + 1}}
         </div>
       </div>
@@ -180,12 +180,12 @@ export default defineComponent({
   }
   .toc-wapper {
     position: absolute;
-    top: 136em;
+    top: 136px;
     left: 0;
     right: 0;
     bottom: 0;
     overflow: hidden auto;
-    padding: 10px;
+    padding: 0 10px;
     box-sizing: border-box;
     .toc-item {
       display: flex;
