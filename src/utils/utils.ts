@@ -1,10 +1,10 @@
-export function debounce(fn: Function, interval = 300) {
+export function debounce(fn: Function, interval = 300, callNow = true) {
   let timer: any = null
-
   return function (...arg) {
-    if (timer != null) clearTimeout(timer)
+    callNow && !timer && fn.call(this, ...arg)
+    if(timer != null) clearTimeout(timer)
     timer = setTimeout(() => {
-      fn.apply(this, arg)
+      fn.call(this, ...arg)
     }, interval)
   }
 }
@@ -15,7 +15,7 @@ export function throttle(fn: Function, interval = 300) {
     if (timer == null) {
       timer = setTimeout(() => {
         timer = null
-        fn.apply(this, arg)
+        fn.call(this, ...arg)
       }, interval)
     }
   }

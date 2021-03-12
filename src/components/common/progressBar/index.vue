@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, InputHTMLAttributes } from 'vue'
-import { throttle } from '@/utils/utils'
+import { throttle, debounce } from '@/utils/utils'
 
 export default defineComponent({
   props: {
@@ -35,8 +35,8 @@ export default defineComponent({
     }
   },
   methods: {
-    onInput: throttle(function (...arg) {
-      this.$emit('onProgreeInput', (arg[0].target as InputHTMLAttributes).value)
+    onInput: throttle(function (event: Event) {
+      this.$emit('onProgreeInput', (event.target as InputHTMLAttributes).value)
     }, 200),
     onChange(event: Event) {
       this.$emit('onProgreeChange', (event.target as InputHTMLAttributes).value)
