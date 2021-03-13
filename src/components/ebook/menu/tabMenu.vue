@@ -130,6 +130,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import 'assets/style/minix.scss';
 .tab-wapper {
   position: relative;
   padding-bottom: 10px;
@@ -183,8 +184,10 @@ export default defineComponent({
     border-bottom: 1px solid #bbb;
     box-sizing: border-box;
     .book-img {
-      padding-right: 10px;
+      @include center;
       height: 100%;
+      padding-right: 10px;
+      font-size: 16px;
       img {
         width: 45px;
         height: 60px;
@@ -239,7 +242,7 @@ export default defineComponent({
       line-height: 40px;
       font-size: 16px;
       &.on {
-        color: rgb(242, 255, 65);
+        color: #0008ff;
       }
       .text {
         flex: 1;

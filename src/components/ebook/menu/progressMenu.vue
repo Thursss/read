@@ -4,20 +4,23 @@
       class="menu-content"
       v-show="isShowMenu && menuMoreShowNumber === 1"
     >
-      <div class="readingTime">
-        <p>已经阅读 {{ Math.ceil(readingTime / 60) }} 分钟</p>
+      <div v-if="!progressAbled">
+        <div class="readingTime">
+          <p>已经阅读 {{ Math.ceil(readingTime / 60) }} 分钟</p>
+        </div>
+        <ProgressBar
+          :readingProgress='readingProgress'
+          :progressAbled='progressAbled'
+          @onProgreeInput='onProgreeInput'
+          @onProgreeChange='onProgreeChange'
+          @onPrevChapter='prevChapter'
+          @onNextChapter='nextChapter'
+        ></ProgressBar>
+        <div class="title">
+          <p>{{(chapterName ? chapterName : '') + ' ' + readingProgress + '%'}}</p>
+        </div>
       </div>
-      <ProgressBar
-        :readingProgress='readingProgress'
-        :progressAbled='progressAbled'
-        @onProgreeInput='onProgreeInput'
-        @onProgreeChange='onProgreeChange'
-        @onPrevChapter='prevChapter'
-        @onNextChapter='nextChapter'
-      ></ProgressBar>
-      <div class="title">
-        <p>{{(chapterName ? chapterName : '') + ' ' + readingProgress + '%'}}</p>
-      </div>
+      <EbookLoading v-else></EbookLoading>
     </div>
   </transition>
 </template>
@@ -26,11 +29,13 @@
 import { defineComponent } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
 import ProgressBar from 'components/common/progressBar/index.vue'
+import EbookLoading from 'components/common/EbookLoading.vue'
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
-    ProgressBar
+    ProgressBar,
+    EbookLoading
   },
   computed: {
     chapterName() {
@@ -38,7 +43,7 @@ export default defineComponent({
         const chapterInfo = this.ebook.section(this.chapter)
         if (chapterInfo && chapterInfo.href) {
           const navigationInfo = this.ebook.navigation.get(chapterInfo.href)
-          if(navigationInfo && navigationInfo['label']){
+          if (navigationInfo && navigationInfo['label']) {
             return navigationInfo['label']
           }
         }

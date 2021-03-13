@@ -26,7 +26,7 @@ export function flatten(arr: any[], key = 'key'): any[] {
 }
 
 export function splitArray(str: string, split: string | null): any[] {
-  if(!str) return []
+  if (!str) return []
   if (!split) return [str]
   return ([].concat(...(str.split(split).map(s => {
     if (s) {
