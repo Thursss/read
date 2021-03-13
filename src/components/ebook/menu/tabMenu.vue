@@ -8,6 +8,7 @@
           type="text"
           placeholder="搜索"
           @click="tiggtFocus(true)"
+          @input="searchInput"
         >
       </div>
       <div
@@ -17,10 +18,12 @@
       >取消</div>
     </div>
     <div class="info-box">
-      <div class="book-img"><img
+      <div class="book-img">
+        <img
           :src="cover"
-          alt=""
-        ></div>
+          :alt="metadata?.title"
+        >
+      </div>
       <div class="book-desc">
         <p class="book-name">{{metadata?.title}}</p>
         <p class="book-author">{{metadata?.creator}}</p>
@@ -51,34 +54,77 @@
       </div>
     </div>
     <div
-      class="seach-wapper"
+      class="search-list-wapper"
       v-else
-    ></div>
+    >
+      <div
+        class="list"
+        v-for="(item, index) in searchList"
+        :key="index + '-l'"
+        @click="displayNav(item?.cfi)"
+      >
+        <div
+          class="line"
+          v-for="(str, i) in splitArray(item?.excerpt, searchVal)"
+          :key="i"
+          :class="{hlight: str === searchVal}"
+        >
+          {{str}}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent, InputHTMLAttributes } from 'vue'
 import { ebookMixin } from '@/utils/ebook/mixin'
+import { debounce, splitArray } from '@/utils/utils'
 
 export default defineComponent({
   mixins: [ebookMixin],
   data() {
     return {
-      inputFocus: false
+      inputFocus: false,
+      searchList: [],
+      searchVal: ''
     }
   },
   methods: {
     tiggtFocus(type: boolean) {
       this.inputFocus = type
+      this.searchList = []
     },
+    searchInput: debounce(function (event: InputEvent) {
+      const value = ((event.target as InputHTMLAttributes).value as string).trim()
+      if (!value) {
+        this.searchList = []
+        this.searchVal = ''
+        return
+      }
+      this.searchVal = value
+      this.doSearch(value).then((res: any[]) => {
+        this.searchList = res
+      })
+    }),
     displayNav(cfi) {
+      this.searchList = []
+      this.inputFocus = false
       this.display(cfi)
       this.hiedMenu()
-    }
+    },
+    doSearch(q: string) {
+      return Promise.all(
+        this?.ebook.spine.spineItems.map(
+          item => item.load(this.ebook.load.bind(this.ebook))
+            .then(item.find.bind(item, q))
+            .finally(item.unload.bind(item)))
+      ).then((res: any[]) => Promise.resolve([].concat(...res)))
+    },
+    splitArray: splitArray
   },
   mounted() {
-    console.log(this.toc)
+    console.log(splitArray('asdc,aa,ff,1', ','))
   }
 })
 </script>
@@ -126,6 +172,7 @@ export default defineComponent({
     .cancel-but {
       margin: 0 5px;
       color: #346cb9;
+      font-size: 14px;
     }
   }
   .info-box {
@@ -199,6 +246,34 @@ export default defineComponent({
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+    }
+  }
+  .search-list-wapper {
+    position: absolute;
+    top: 136px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden auto;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    .list {
+      width: 100%;
+      // max-height: 62px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      // white-space: nowrap;
+      line-height: 21px;
+      .line{
+        width: auto;
+        display: inline;
+        &.hlight{
+          color: #0d51e8;
+        }
       }
     }
   }
