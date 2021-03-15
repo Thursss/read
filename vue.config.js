@@ -14,7 +14,6 @@ module.exports = {
         utils: '@/utils'
       }
     },
-
   },
   css: {
     loaderOptions: {
