@@ -13,12 +13,12 @@ module.exports = {
         router: '@/router',
         utils: '@/utils'
       }
-    }
-  },
-  husky: {
-    hooks: {
-      'commit-msg': 'commitlint -E HUSKY_GIT_PARAMS'
-    }
+    },
+    husky: {
+      hooks: {
+        'commit-msg': 'commitlint -E HUSKY_GIT_PARAMS'
+      }
+    },
   },
   css: {
     loaderOptions: {
