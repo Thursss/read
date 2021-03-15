@@ -4,6 +4,7 @@
       <BookTitle></BookTitle>
       <BookRender></BookRender>
       <BookMenu></BookMenu>
+      <EventMask></EventMask>
     </div>
   </div>
 </template>
@@ -15,13 +16,16 @@ import { ebookMixin } from '@/utils/ebook/mixin'
 import BookRender from 'components/ebook/ebookRender.vue'
 import BookTitle from 'components/ebook/ebookTitle.vue'
 import BookMenu from 'components/ebook/ebookMenu.vue'
+import EventMask from 'components/ebook/EventMask.vue'
+
 
 export default defineComponent({
   mixins: [ebookMixin],
   components: {
     BookTitle,
     BookMenu,
-    BookRender
+    BookRender,
+    EventMask
   },
   methods: {
     tickTime() {
@@ -48,7 +52,6 @@ export default defineComponent({
 }
 .read-wapper {
   position: relative;
-  background-color: #ccc;
 }
 .shadow {
   background-color: rgba(0, 0, 0, 0.3);

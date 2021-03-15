@@ -164,6 +164,8 @@ export default defineComponent({
         if (TimeStamp > 50) {
           if (MoveY >= 80) {
             console.log(MoveY)
+            this.$refs['read'].style
+            console.log(this.$refs['read'].style)
           } else if (MoveX < -40) {
             if (this.isShowMenu) this.setMenuShow()
             this.rendition.next().then(() => {
@@ -192,6 +194,17 @@ export default defineComponent({
       })
     }
   },
+  watch: {
+    moveY(moveY) {
+      this.$refs['read'].style.transition = ''
+      if (moveY < 0) {
+        this.$refs['read'].style.transition = '.2s ease-in'
+        moveY = 0
+      }
+
+      this.$refs['read'].style.transform = `translateY(${moveY}px)`
+    }
+  },
   mounted() {
     this.setFillName(this.$route.params.fillName).then(() => {
       this.initEpub()
@@ -201,4 +214,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.read {
+  background-color: #ccc;
+}
 </style>

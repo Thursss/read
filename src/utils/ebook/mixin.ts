@@ -20,6 +20,7 @@ export const ebookMixin = {
       toc: state => (state as EbookStore).toc,
       cover: state => (state as EbookStore).cover,
       metadata: state => (state as EbookStore).metadata,
+      moveY: state => (state as EbookStore).moveY,
     })
   },
   methods: {
@@ -38,7 +39,8 @@ export const ebookMixin = {
       'setChapter',
       'setToc',
       'setCover',
-      'setMetadata'
+      'setMetadata',
+      'setMoveY'
     ]),
     hiedMenu() {
       this.setMenuShow(false)

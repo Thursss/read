@@ -13,7 +13,8 @@ export interface EbookStore {
   chapter: number,
   toc: any,
   cover: string,
-  metadata: object
+  metadata: object,
+  moveY: number
 }
 
 export type EbookLocalStorageType = 'fontSizeListIndex' | 'fontFamilyListIndex' | 'themeListIndex' | 'readingProgress' | 'readingTime'

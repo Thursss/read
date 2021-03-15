@@ -19,7 +19,8 @@ export default {
       chapter: 0,
       toc: null,
       cover: '',
-      metadata: {}
+      metadata: {},
+      moveY: 0, // 当小于0时表示松开手指
     }
   },
   mutations: {
@@ -27,7 +28,7 @@ export default {
       state.fillName = fillName ?? ''
     },
     SET_MENU_SHOW(state: EbookStore, menuShow?: boolean) {
-      state.isShowMenu = !state.isShowMenu
+      state.isShowMenu = menuShow ?? !state.isShowMenu
       if(state.isShowMenu == false) state.menuMoreShowNumber = -1
     },
     SET_MENU_MORE_SHOW(state: EbookStore, menuMoreShowNumber: number) {
@@ -73,6 +74,9 @@ export default {
     SET_METADATA(state: EbookStore, metadata: object) {
       state.metadata = metadata
     },
+    SET_MOVEY(state: EbookStore, moveY: number) {
+      state.moveY = moveY
+    }
   },
   actions: {
     setFillName({ commit }, fillName?: string) {
@@ -119,6 +123,9 @@ export default {
     },
     setMetadata({ commit }, metadata: object) {
       commit('SET_METADATA', metadata)
+    },
+    setMoveY({ commit }, moveY: number) {
+      commit('SET_MOVEY', moveY)
     },
   },
 }
