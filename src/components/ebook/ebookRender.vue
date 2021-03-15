@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="read"
-    class="read"
-    ref="read"
-  ></div>
+  <div id="read" class="read" ref="read"></div>
 </template>
 
 <script lang='ts'>
